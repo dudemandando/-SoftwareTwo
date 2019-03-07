@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views;
+package controllers;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,8 +30,12 @@ public class MainMenuViewController implements Initializable {
     
     
     @FXML public void AllCustomersView(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/mainMenuView.fxml"));
-        rootPane.getChildren().setAll(pane);
+        try{
+             AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/AllCustomersView.fxml"));
+            rootPane.getChildren().setAll(pane);
+        }catch(Exception ex){
+        System.out.print(ex);
+        }
     }
     
     @FXML public void newCustomersView(ActionEvent event) throws IOException {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views;
+package controllers;
 
 import static com.oracle.jrockit.jfr.FlightRecorder.isActive;
 import java.io.IOException;
@@ -197,9 +197,7 @@ public class NewCustomerController implements Initializable {
     
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
+    public void initialize(URL url, ResourceBundle rb) {        
         isActive.setToggleGroup(group);
         
     }    
