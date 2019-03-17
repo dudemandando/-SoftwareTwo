@@ -36,6 +36,17 @@ public class AllCustomersViewController implements Initializable {
         // TODO
     }
     
+    @FXML 
+    private void editSelected() throws IOException{
+        System.out.println("Edit Selected Button");
+        try{
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/ModifyCusotmerView.fxml"));
+        root.getChildren().setAll(pane);
+        }catch(Exception ex){
+            System.out.println();
+        }
+        
+    }
     
     @FXML 
     private void returnToMain() throws IOException{

@@ -7,8 +7,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewCustomerController">
-   <children>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.ModifyCustomerController">
+    <children>
       <Text layoutX="87.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Customer | Calendar App" textAlignment="CENTER">
          <font>
             <Font size="32.0" />
@@ -27,9 +27,10 @@
       <Text layoutX="154.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" />
       <Text layoutX="154.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal/Zip Code" />
       <Text layoutX="154.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number" />
-      <Button fx:id="save" layoutX="453.0" layoutY="358.0" mnemonicParsing="false" onAction="#saveCustomer" text="Save" />
-      <Button fx:id="cancel" layoutX="522.0" layoutY="358.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <Button fx:id="save" layoutX="453.0" layoutY="358.0" mnemonicParsing="false" onAction="" text="Save" />
+      <Button fx:id="cancel" layoutX="522.0" layoutY="358.0" mnemonicParsing="false" onAction="" text="Cancel" />
       <Text layoutX="154.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country" />
       <TextField fx:id="country" layoutX="364.0" layoutY="315.0" promptText="Country" />
+      
    </children>
 </AnchorPane>

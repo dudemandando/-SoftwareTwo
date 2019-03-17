@@ -50,7 +50,7 @@ public class NewCustomerController implements Initializable {
     
     
     
-    @FXML public void saveCustomer() throws SQLException{
+    @FXML public void saveCustomer() throws SQLException, IOException{
         
         
         String cityQuery  = "select * from city where city = " + q + city.getText().toString() + q;
@@ -173,6 +173,10 @@ public class NewCustomerController implements Initializable {
         
         dbDriver.queryNoReturn(insertCustomerQuery + insertCustomerVals);
         getActiveVal();
+        
+        System.out.println(" Change to Main Menu view");
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/mainMenuView.fxml"));
+        anchorPane.getChildren().setAll(pane);
     }
     
     
