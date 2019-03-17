@@ -10,6 +10,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,6 +101,11 @@ public class AllCustomersViewController implements Initializable {
                 result.getString("lastUpdateBy")
             );
             
+            allCustomers.add(entry);
+            
+            for(int i =0; i< allCustomers.size(); i++ ){
+                System.out.println("Name is: " + allCustomers.get(i).getCustomerName());
+            }
                     
         }
        
