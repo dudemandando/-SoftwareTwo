@@ -7,13 +7,20 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import softwaretwo.Driver;
+import softwaretwo.Customer;
 
 /**
  * FXML Controller class
@@ -22,6 +29,9 @@ import javafx.scene.layout.AnchorPane;
  */
 public class AllCustomersViewController implements Initializable {
 
+    
+    private Driver dbDriver;
+    private List<Customer> allCustomers = new ArrayList<Customer>();
     @FXML AnchorPane root;
     @FXML TableView customersTable;
     @FXML Button editUser;
@@ -33,7 +43,13 @@ public class AllCustomersViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        try {
+            populateAllCustomers();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
     }
     
     @FXML 
@@ -53,6 +69,41 @@ public class AllCustomersViewController implements Initializable {
         System.out.println("Returning to Main Menu view");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/mainMenuView.fxml"));
         root.getChildren().setAll(pane);
+    }
+    
+    private void populateAllCustomers() throws SQLException{
+        String query = "select * from customer;";
+        ResultSet result = dbDriver.queryAndReturn(query);
+        
+        
+        int count;
+        if(result != null){
+            
+            result.last();
+            count = result.getRow();
+            result.first();
+            System.out.println("not null count is: " + Integer.toString(count));
+        }else{
+            System.out.println("is null");
+            count = 0;
+        }
+
+        
+        while(result.next()){
+            Customer entry = new Customer(
+                result.getString("customerName"),
+                Integer.parseInt(result.getString("addressId")),
+                Integer.parseInt(result.getString("active")),
+                result.getString("createDate"),
+                result.getString("createdBy"),
+                result.getString("lastUpdate"),
+                result.getString("lastUpdateBy")
+            );
+            
+                    
+        }
+       
+        
     }
     
 }
