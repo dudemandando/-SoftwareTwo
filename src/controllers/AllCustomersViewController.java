@@ -14,11 +14,16 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import softwaretwo.Driver;
 import softwaretwo.Customer;
@@ -32,9 +37,13 @@ public class AllCustomersViewController implements Initializable {
 
     
     private Driver dbDriver;
-    private List<Customer> allCustomers = new ArrayList<Customer>();
+    private ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     @FXML AnchorPane root;
     @FXML TableView customersTable;
+    @FXML TableColumn <Customer, Integer> colCustomerId;
+    @FXML TableColumn <Customer, String> colCustomerName;
+    @FXML TableColumn <Customer, Integer>colCustomerActive;
+    @FXML TableColumn <Customer, String> colCustomerLastUpdate;
     @FXML Button editUser;
     @FXML Button cancel;
     
@@ -75,40 +84,47 @@ public class AllCustomersViewController implements Initializable {
     private void populateAllCustomers() throws SQLException{
         String query = "select * from customer;";
         ResultSet result = dbDriver.queryAndReturn(query);
-        
-        
-        int count;
+
         if(result != null){
+            while(result.next()){
+                Customer entry = new Customer(
+                    result.getInt("customerId"),
+                    result.getString("customerName"),
+                    Integer.parseInt(result.getString("addressId")),
+                    Integer.parseInt(result.getString("active")),
+                    result.getString("createDate"),
+                    result.getString("createdBy"),
+                    result.getString("lastUpdate"),
+                    result.getString("lastUpdateBy")
+                );
             
-            result.last();
-            count = result.getRow();
-            result.first();
-            System.out.println("not null count is: " + Integer.toString(count));
+                allCustomers.add(entry);
+            
+                
+                    
+            }
+            for(int i =0; i< allCustomers.size(); i++ ){
+                    System.out.println("Name is: " + allCustomers.get(i).getCustomerName());
+                }
+            
+            populateAllCustomersTable();
+            
         }else{
             System.out.println("is null");
-            count = 0;
+           
         }
-
         
-        while(result.next()){
-            Customer entry = new Customer(
-                result.getString("customerName"),
-                Integer.parseInt(result.getString("addressId")),
-                Integer.parseInt(result.getString("active")),
-                result.getString("createDate"),
-                result.getString("createdBy"),
-                result.getString("lastUpdate"),
-                result.getString("lastUpdateBy")
-            );
-            
-            allCustomers.add(entry);
-            
-            for(int i =0; i< allCustomers.size(); i++ ){
-                System.out.println("Name is: " + allCustomers.get(i).getCustomerName());
-            }
-                    
-        }
-       
+    }
+    
+    private void populateAllCustomersTable(){
+        
+        colCustomerName.setCellValueFactory(new PropertyValueFactory  ("customerName"));
+        colCustomerId.setCellValueFactory(new PropertyValueFactory <Customer, Integer> ("customerId"));
+        colCustomerActive.setCellValueFactory(new PropertyValueFactory <Customer, Integer> ("customerIsActive"));
+        colCustomerLastUpdate.setCellValueFactory(new PropertyValueFactory <Customer, String> ("customerLastUpdate"));
+        customersTable.setItems(allCustomers);
+        customersTable.refresh();
+
         
     }
     

@@ -7,15 +7,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.AllCustomersViewController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AllCustomersViewController">
    <children>
       <TableView fx:id="customersTable" layoutX="43.0" layoutY="98.0" prefHeight="205.0" prefWidth="532.0">
         <columns>
-          <TableColumn prefWidth="50.0" text="ID" />
-          <TableColumn prefWidth="284.0" text="Name" />
-            <TableColumn prefWidth="76.0" text="Is Active?" />
-            <TableColumn prefWidth="121.0" text="Last Update" />
+          <TableColumn fx:id="colCustomerId" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="colCustomerName" prefWidth="284.0" text="Name" />
+            <TableColumn fx:id="colCustomerActive" prefWidth="76.0" text="Is Active?" />
+            <TableColumn fx:id="colCustomerLastUpdate" prefWidth="121.0" text="Last Update" />
         </columns>
       </TableView>
       <Text layoutX="203.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Customers" textAlignment="CENTER">
@@ -23,8 +22,8 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Button fx:id="editUser" onAction="#editSelected" layoutX="157.0" layoutY="329.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Modify" />
-      <Button fx:id="cancel" onAction="#returnToMain" layoutX="352.0" layoutY="329.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Cancel" />
+      <Button fx:id="editUser" layoutX="157.0" layoutY="329.0" mnemonicParsing="false" onAction="#editSelected" prefHeight="25.0" prefWidth="93.0" text="Modify" />
+      <Button fx:id="cancel" layoutX="352.0" layoutY="329.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="25.0" prefWidth="93.0" text="Cancel" />
       <Text layoutX="64.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To edit a customer, select and click &quot;Modify&quot;. Otherwise click Cancel to return to the Main Menu" />
    </children>
 </AnchorPane>

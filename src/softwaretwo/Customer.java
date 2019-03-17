@@ -15,162 +15,175 @@ import javafx.beans.property.SimpleStringProperty;
 public class Customer {
 
     
-    public Customer(String customerName, int customerAddressId, int customerIsActive, String customerCreateDate, String customerCreatedBy, String customerLastUpdate, String customerLastUpdatedBy) {
-        this.customerName = new SimpleStringProperty(customerName);
-        this.customerAddressId = new SimpleIntegerProperty(customerAddressId);
-        this.customerIsActive = new SimpleIntegerProperty(customerIsActive);
-        this.customerCreateDate = new SimpleStringProperty(customerCreateDate);
-        this.customerCreatedBy = new SimpleStringProperty(customerCreatedBy);
-        this.customerLastUpdate = new SimpleStringProperty(customerLastUpdate);
-        this.customerLastUpdatedBy = new SimpleStringProperty(customerLastUpdatedBy);
+    public Customer(int customerId, String customerName, int customerAddressId, int customerIsActive, String customerCreateDate, String customerCreatedBy, String customerLastUpdate, String customerLastUpdatedBy) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerAddressId = customerAddressId;
+        this.customerIsActive = customerIsActive;
+        this.customerCreateDate =customerCreateDate;
+        this.customerCreatedBy = customerCreatedBy;
+        this.customerLastUpdate = customerLastUpdate;
+        this.customerLastUpdatedBy = customerLastUpdatedBy;
     }
     
-
-    private SimpleStringProperty customerName;
-    private SimpleIntegerProperty customerAddressId;
-    private SimpleIntegerProperty customerIsActive;
-    private SimpleStringProperty customerCreateDate;
-    private SimpleStringProperty customerCreatedBy;
-    private SimpleStringProperty customerLastUpdate;
-    private SimpleStringProperty customerLastUpdatedBy;
+    private Integer customerId;
+    private String customerName;
+    private Integer customerAddressId;
+    private Integer customerIsActive;
+    private String customerCreateDate;
+    private String customerCreatedBy;
+    private String customerLastUpdate;
+    private String customerLastUpdatedBy;
     
-    private SimpleStringProperty addressOne;
-    private SimpleStringProperty addressTwo;
-    private SimpleIntegerProperty cityId;
-    private SimpleStringProperty postalCode;
-    private SimpleStringProperty phone;
-    private SimpleStringProperty addressCreateDate;
-    private SimpleStringProperty addressCreatedBy;
-    private SimpleStringProperty addressLastUpdate;
-    private SimpleStringProperty addressLastUpdatedBy;
+    private String addressOne;
+    private String addressTwo;
+    private Integer cityId;
+    private String postalCode;
+    private String phone;
+    private String addressCreateDate;
+    private String addressCreatedBy;
+    private String addressLastUpdate;
+    private String addressLastUpdatedBy;
 
-    public SimpleStringProperty getCustomerName() {
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getCustomerName() {
         return customerName;
     }
 
-    public void setCustomerName(SimpleStringProperty customerName) {
+    public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
 
-    public SimpleIntegerProperty getCustomerAddressId() {
+    public Integer getCustomerAddressId() {
         return customerAddressId;
     }
 
-    public void setCustomerAddressId(SimpleIntegerProperty customerAddressId) {
+    public void setCustomerAddressId(Integer customerAddressId) {
         this.customerAddressId = customerAddressId;
     }
 
-    public SimpleIntegerProperty getCustomerIsActive() {
+    public Integer getCustomerIsActive() {
         return customerIsActive;
     }
 
-    public void setCustomerIsActive(SimpleIntegerProperty customerIsActive) {
+    public void setCustomerIsActive(Integer customerIsActive) {
         this.customerIsActive = customerIsActive;
     }
 
-    public SimpleStringProperty getCustomerCreateDate() {
+    public String getCustomerCreateDate() {
         return customerCreateDate;
     }
 
-    public void setCustomerCreateDate(SimpleStringProperty customerCreateDate) {
+    public void setCustomerCreateDate(String customerCreateDate) {
         this.customerCreateDate = customerCreateDate;
     }
 
-    public SimpleStringProperty getCustomerCreatedBy() {
+    public String getCustomerCreatedBy() {
         return customerCreatedBy;
     }
 
-    public void setCustomerCreatedBy(SimpleStringProperty customerCreatedBy) {
+    public void setCustomerCreatedBy(String customerCreatedBy) {
         this.customerCreatedBy = customerCreatedBy;
     }
 
-    public SimpleStringProperty getCustomerLastUpdate() {
+    public String getCustomerLastUpdate() {
         return customerLastUpdate;
     }
 
-    public void setCustomerLastUpdate(SimpleStringProperty customerLastUpdate) {
+    public void setCustomerLastUpdate(String customerLastUpdate) {
         this.customerLastUpdate = customerLastUpdate;
     }
 
-    public SimpleStringProperty getCustomerLastUpdatedBy() {
+    public String getCustomerLastUpdatedBy() {
         return customerLastUpdatedBy;
     }
 
-    public void setCustomerLastUpdatedBy(SimpleStringProperty customerLastUpdatedBy) {
+    public void setCustomerLastUpdatedBy(String customerLastUpdatedBy) {
         this.customerLastUpdatedBy = customerLastUpdatedBy;
     }
 
-    public SimpleStringProperty getAddressOne() {
+    public String getAddressOne() {
         return addressOne;
     }
 
-    public void setAddressOne(SimpleStringProperty addressOne) {
+    public void setAddressOne(String addressOne) {
         this.addressOne = addressOne;
     }
 
-    public SimpleStringProperty getAddressTwo() {
+    public String getAddressTwo() {
         return addressTwo;
     }
 
-    public void setAddressTwo(SimpleStringProperty addressTwo) {
+    public void setAddressTwo(String addressTwo) {
         this.addressTwo = addressTwo;
     }
 
-    public SimpleIntegerProperty getCityId() {
+    public Integer getCityId() {
         return cityId;
     }
 
-    public void setCityId(SimpleIntegerProperty cityId) {
+    public void setCityId(Integer cityId) {
         this.cityId = cityId;
     }
 
-    public SimpleStringProperty getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(SimpleStringProperty postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
-    public SimpleStringProperty getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(SimpleStringProperty phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public SimpleStringProperty getAddressCreateDate() {
+    public String getAddressCreateDate() {
         return addressCreateDate;
     }
 
-    public void setAddressCreateDate(SimpleStringProperty addressCreateDate) {
+    public void setAddressCreateDate(String addressCreateDate) {
         this.addressCreateDate = addressCreateDate;
     }
 
-    public SimpleStringProperty getAddressCreatedBy() {
+    public String getAddressCreatedBy() {
         return addressCreatedBy;
     }
 
-    public void setAddressCreatedBy(SimpleStringProperty addressCreatedBy) {
+    public void setAddressCreatedBy(String addressCreatedBy) {
         this.addressCreatedBy = addressCreatedBy;
     }
 
-    public SimpleStringProperty getAddressLastUpdate() {
+    public String getAddressLastUpdate() {
         return addressLastUpdate;
     }
 
-    public void setAddressLastUpdate(SimpleStringProperty addressLastUpdate) {
+    public void setAddressLastUpdate(String addressLastUpdate) {
         this.addressLastUpdate = addressLastUpdate;
     }
 
-    public SimpleStringProperty getAddressLastUpdatedBy() {
+    public String getAddressLastUpdatedBy() {
         return addressLastUpdatedBy;
     }
 
-    public void setAddressLastUpdatedBy(SimpleStringProperty addressLastUpdatedBy) {
+    public void setAddressLastUpdatedBy(String addressLastUpdatedBy) {
         this.addressLastUpdatedBy = addressLastUpdatedBy;
     }
+
+   
+
+    
 
     
     
