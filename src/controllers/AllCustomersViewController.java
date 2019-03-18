@@ -25,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.event.ActionEvent;
 import softwaretwo.Driver;
 import softwaretwo.Customer;
 
@@ -39,7 +40,7 @@ public class AllCustomersViewController implements Initializable {
     private Driver dbDriver;
     private ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     @FXML AnchorPane root;
-    @FXML TableView customersTable;
+    @FXML TableView<Customer> customersTable;
     @FXML TableColumn <Customer, Integer> colCustomerId;
     @FXML TableColumn <Customer, String> colCustomerName;
     @FXML TableColumn <Customer, Integer>colCustomerActive;
@@ -64,13 +65,12 @@ public class AllCustomersViewController implements Initializable {
     
     @FXML 
     private void editSelected() throws IOException{
-        System.out.println("Edit Selected Button");
-        try{
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/ModifyCusotmerView.fxml"));
+        System.out.println("Modify Selected Button");
+        //modifySelectedCustomer();
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/ModifyCustomerView.fxml"));
         root.getChildren().setAll(pane);
-        }catch(Exception ex){
-            System.out.println();
-        }
+        
+        
         
     }
     
@@ -126,6 +126,15 @@ public class AllCustomersViewController implements Initializable {
         customersTable.refresh();
 
         
+    }
+    
+    private void modifySelectedCustomer(){
+        if(allCustomers.size() >  0){
+            if(customersTable.getSelectionModel().getSelectedItem() != null){
+                Customer selected = customersTable.getSelectionModel().getSelectedItem();
+                dbDriver.setCarryCustomer(selected);
+            }
+        }
     }
     
 }

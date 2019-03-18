@@ -22,6 +22,17 @@ public class Driver {
         static String pass = "53688546380";
         static private String currentAdminName;
         static Connection myConn;
+        
+        static Customer carryCustomer;
+
+    public static Customer getCarryCustomer() {
+        return carryCustomer;
+    }
+
+    public static void setCarryCustomer(Customer carryCustomer) {
+        Driver.carryCustomer = carryCustomer;
+    }
+
     
     public static void main(String[] args){
         
