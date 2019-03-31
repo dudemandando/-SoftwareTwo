@@ -66,8 +66,8 @@ public class AllCustomersViewController implements Initializable {
     @FXML 
     private void editSelected() throws IOException{
         System.out.println("Modify Selected Button");
-        //modifySelectedCustomer();
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/ModifyCustomerView.fxml"));
+        modifySelectedCustomer();
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/modifyCustomerView.fxml"));
         root.getChildren().setAll(pane);
         
         
@@ -130,10 +130,11 @@ public class AllCustomersViewController implements Initializable {
     
     private void modifySelectedCustomer(){
         if(allCustomers.size() >  0){
-            if(customersTable.getSelectionModel().getSelectedItem() != null){
+            
                 Customer selected = customersTable.getSelectionModel().getSelectedItem();
+                System.out.println(selected.getCustomerName());
                 dbDriver.setCarryCustomer(selected);
-            }
+            
         }
     }
     
