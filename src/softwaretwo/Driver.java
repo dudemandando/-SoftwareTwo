@@ -32,6 +32,12 @@ public class Driver {
     public static void setCarryCustomer(Customer carryCustomer) {
         Driver.carryCustomer = carryCustomer;
     }
+    
+    public static void getConnection() throws SQLException, ClassNotFoundException{
+            Class.forName(driver);
+            myConn = DriverManager.getConnection(url,user,pass);
+            System.out.println("Connected to database: " + db);
+    }
 
     
     public static void main(String[] args){
@@ -42,7 +48,7 @@ public class Driver {
             //1.Get a connection to the database
             
             Class.forName(driver);
-            Connection myConn = DriverManager.getConnection(url,user,pass);
+            myConn = DriverManager.getConnection(url,user,pass);
             System.out.println("Connected to database: " + db);
             
             //2. Create a statement
@@ -69,7 +75,9 @@ public class Driver {
             //1.Get a connection to the database
             
             Class.forName(driver);
-            Connection myConn = DriverManager.getConnection(url,user,pass);
+            if(myConn == null){
+                 Connection myConn = DriverManager.getConnection(url,user,pass);
+            }
             System.out.println("Connected to database: " + db);
             
             //2. Create a statement
@@ -97,7 +105,9 @@ public class Driver {
             //1.Get a connection to the database
             
             Class.forName(driver);
-            Connection myConn = DriverManager.getConnection(url,user,pass);
+            if(myConn == null){
+                 Connection myConn = DriverManager.getConnection(url,user,pass);
+            }
             System.out.println("Connected to database: " + db);
             
             //2. Create a statement
@@ -121,7 +131,10 @@ public class Driver {
             //1.Get a connection to the database
             
             Class.forName(driver);
-            Connection myConn = DriverManager.getConnection(url,user,pass);
+            if(myConn == null){
+                 Connection myConn = DriverManager.getConnection(url,user,pass);
+            }
+           
             System.out.println("Connected to database: " + db);
             
             //2. Create a statement
@@ -150,7 +163,9 @@ public class Driver {
             //1.Get a connection to the database
             
             Class.forName(driver);
-            Connection myConn = DriverManager.getConnection(url,user,pass);
+            if(myConn == null){
+                 Connection myConn = DriverManager.getConnection(url,user,pass);
+            }
             System.out.println("Connected to database: " + db);
             
             //2. Create a statement

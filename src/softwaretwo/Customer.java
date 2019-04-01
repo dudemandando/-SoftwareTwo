@@ -38,8 +38,14 @@ public class Customer {
     private String addressOne;
     private String addressTwo;
     private Integer cityId;
+
+   
+    private String city;
     private String postalCode;
     private String phone;
+    private String country;
+
+    
     private String addressCreateDate;
     private String addressCreatedBy;
     private String addressLastUpdate;
@@ -181,9 +187,21 @@ public class Customer {
         this.addressLastUpdatedBy = addressLastUpdatedBy;
     }
 
-   
+    public String getCity() {
+        return city;
+    }
 
-    
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     
     

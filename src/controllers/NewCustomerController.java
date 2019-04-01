@@ -79,6 +79,7 @@ public class NewCustomerController implements Initializable {
             
             //Set the Id
             countryId = dbDriver.getIdOfValue(cityQuery, "countryId");
+            System.out.println("new customer country Id is: " + countryId);
         }
         
         if(isExistingCity == true){
