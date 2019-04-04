@@ -101,7 +101,7 @@ public class ModifyCustomerController implements Initializable {
         postalCode.setText(addressRs.getString("postalCode"));
         phoneNumber.setText(addressRs.getString("phone"));
         city.setText(cityRs.getString("city"));
-        //country.setText(countryRs.getString("country"));
+        country.setText(countryRs.getString("country"));
           
         //set the current customer object data
         currentCust.setAddressOne(addressRs.getString("address"));
