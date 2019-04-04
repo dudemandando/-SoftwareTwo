@@ -62,8 +62,7 @@ public class NewCustomerController implements Initializable {
             
             //Get the County Id
             System.out.println("Country exists");
-            cityId = dbDriver.getIdOfValue(countryQuery, "countryId");
-            System.out.println("Country Id is: " + countryId);
+            
                
         }else{
             //Insert city into DB
@@ -78,9 +77,10 @@ public class NewCustomerController implements Initializable {
             dbDriver.queryNoReturn(insertQuery);
             
             //Set the Id
-            countryId = dbDriver.getIdOfValue(cityQuery, "countryId");
-            System.out.println("new customer country Id is: " + countryId);
         }
+        
+            countryId = dbDriver.getIdOfValue(countryQuery, "countryId");
+            System.out.println("Country Id is: " + countryId);
         
         if(isExistingCity == true){
             
