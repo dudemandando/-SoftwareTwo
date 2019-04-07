@@ -12,10 +12,12 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import softwaretwo.Customer;
 import softwaretwo.Driver;
@@ -31,7 +33,7 @@ public class ModifyCustomerController implements Initializable {
      * Initializes the controller class.
      */
     
-    @FXML AnchorPane anchorPane;
+    @FXML AnchorPane root;
     @FXML TextField customerName;
     @FXML TextField addressOne;
     @FXML TextField addressTwo;
@@ -39,11 +41,13 @@ public class ModifyCustomerController implements Initializable {
     @FXML TextField postalCode;
     @FXML TextField country;
     @FXML TextField phoneNumber;
-    @FXML RadioButton isActive;
+    
     @FXML Button saveButton;
     @FXML Button cancelButton;
     
-    
+    @FXML RadioButton isActive;
+    private ToggleGroup group = new ToggleGroup();
+
     private Driver dbDriver;
     private Customer currentCust;
     
@@ -57,6 +61,8 @@ public class ModifyCustomerController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(ModifyCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }
     
     @FXML
@@ -67,7 +73,15 @@ public class ModifyCustomerController implements Initializable {
     
     @FXML
     public void onCancelButton(){
-        System.out.println("Modify Customer Cancel Button");
+        System.out.println("Modify Customer Cancel Button - Returning to All Customers View");
+        currentCust = null;
+        try{
+             AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/AllCustomersView.fxml"));
+            root.getChildren().setAll(pane);
+        }catch(Exception ex){
+        System.out.print(ex);
+        }
+        
     }
     
     private void populateInfo() throws SQLException{
@@ -112,6 +126,45 @@ public class ModifyCustomerController implements Initializable {
         currentCust.setCountry(countryRs.getString("country"));
         
         
+    }
+    
+    private void setNewInfo(){
+        
+        
+        //set the customer refs
+        currentCust.setCustomerName(customerName.getText());
+        
+
+        //set the Address Refs
+        currentCust.setAddressOne(addressOne.getText());
+        currentCust.setAddressTwo( addressTwo.getText());
+        currentCust.setPostalCode(postalCode.getText());
+        currentCust.setPhone(phoneNumber.getText());
+        currentCust.setCity(city.getText());
+        currentCust.setCountry(country.getText());
+        
+        //Set the isActive ref
+        currentCust.setIsActive(determineActivity());
+        
+    }
+    
+    private void checkForAndGetNewCity() throws SQLException{
+        
+    }
+    
+    private void checkForAndGetNewCountry()throws SQLException{
+        
+    }
+    
+    private int determineActivity(){
+        //Set the toggle group to get the radio button value
+        isActive.setToggleGroup(group);
+        
+        if(isActive.getToggleGroup().selectedToggleProperty().getValue() != null){
+           return 1;
+       }else{
+           return 0;
+       }
     }
     
     

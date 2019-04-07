@@ -34,6 +34,10 @@ public class Customer {
     private String customerCreatedBy;
     private String customerLastUpdate;
     private String customerLastUpdatedBy;
+
+   
+    
+    private int isActive;
     
     private String addressOne;
     private String addressTwo;
@@ -203,7 +207,13 @@ public class Customer {
         this.country = country;
     }
 
-    
+     public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
+    }
     
     
     
