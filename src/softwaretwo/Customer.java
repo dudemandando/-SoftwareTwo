@@ -47,6 +47,9 @@ public class Customer {
     private String city;
     private String postalCode;
     private String phone;
+
+      
+    private Integer countryId;
     private String country;
 
     
@@ -215,6 +218,12 @@ public class Customer {
         this.isActive = isActive;
     }
     
-    
+      public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
+    }
     
 }

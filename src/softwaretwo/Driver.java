@@ -100,7 +100,7 @@ public class Driver {
     
     
     public static void queryNoReturn(String query){
-        System.out.println("Query And Return with Query: " + query);
+        System.out.println("Query No Return: " + query);
         try{
             //1.Get a connection to the database
             
