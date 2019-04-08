@@ -46,7 +46,7 @@ public class ModifyCustomerController implements Initializable {
     @FXML Button cancelButton;
     
     @FXML RadioButton isActive;
-    private ToggleGroup group = new ToggleGroup();
+    private ToggleGroup group;
 
     private Driver dbDriver;
     private Customer currentCust;
@@ -59,6 +59,7 @@ public class ModifyCustomerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        group = new ToggleGroup();
         currentCust = dbDriver.getCarryCustomer();
         try {
             populateInfo();
@@ -72,6 +73,7 @@ public class ModifyCustomerController implements Initializable {
     @FXML
     public void onSaveButton() throws SQLException{
         System.out.println("Modify Customer Save Button");
+        determineActivity();
         setNewInfo();
         checkCityAndCountry();
     }
@@ -163,29 +165,24 @@ public class ModifyCustomerController implements Initializable {
        String countryQuery = "select * from country where country.country= " + q + currentCust.getCountry() + q + ";";
        isExisitingCountry = dbDriver.queryCheckIfExists(countryQuery, currentCust.getCountry(), "country");
        
-           System.out.println("Does City exisit? " + currentCust.getCity() + " : " + isExisitingCity);
-       
-       
+       System.out.println("Does City exisit? " + currentCust.getCity() + " : " + isExisitingCity);
+       System.out.println("Does City exisit? " + currentCust.getCountry() + " : " + isExisitingCountry);
 
-           System.out.println("Does City exisit? " + currentCust.getCountry() + " : " + isExisitingCountry);
-       
-       
     }
     
-    private void checkForAndGetNewCountry()throws SQLException{
+    
+    private int determineActivity(){
+        //Set the toggle group to get the radio button value
+        isActive.setToggleGroup(group);
         
+        if(isActive.getToggleGroup().selectedToggleProperty().getValue() != null){
+            System.out.println("Activity is True");
+           return 1;
+       }else{
+            System.out.println("Activity is False");
+           return 0;
+       }
     }
-    
-//    private int determineActivity(){
-//        //Set the toggle group to get the radio button value
-//        isActive.setToggleGroup(group);
-//        
-//        if(isActive.getToggleGroup().selectedToggleProperty().getValue() != null){
-//           return 1;
-//       }else{
-//           return 0;
-//       }
-//    }
     
     
 }

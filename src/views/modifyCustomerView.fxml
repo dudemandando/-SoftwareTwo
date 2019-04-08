@@ -21,9 +21,9 @@
       <Text layoutX="161.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal/Zip Code" />
       <Text layoutX="163.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number" />
       <Text layoutX="161.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country" />
-      <RadioButton id="isActive" layoutX="249.0" layoutY="349.0" mnemonicParsing="false" text="Is Active?" />
-      <Button id="saveButton" onAction="#onSaveButton"  layoutX="397.0" layoutY="345.0" mnemonicParsing="false" text="Save" />
-      <Button id="cancelButton" onAction="#onCancelButton"  layoutX="471.0" layoutY="345.0" mnemonicParsing="false" text="Cancel" />
+      <RadioButton fx:id="isActive" layoutX="249.0" layoutY="349.0" mnemonicParsing="false" text="Is Active?" />
+      <Button fx:id="saveButton" onAction="#onSaveButton"  layoutX="397.0" layoutY="345.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="cancelButton" onAction="#onCancelButton"  layoutX="471.0" layoutY="345.0" mnemonicParsing="false" text="Cancel" />
       <TextField fx:id="customerName" layoutX="269.0" layoutY="62.0" />
       <TextField fx:id="addressOne" layoutX="269.0" layoutY="103.0" />
       <TextField fx:id="addressTwo" layoutX="269.0" layoutY="139.0" />
