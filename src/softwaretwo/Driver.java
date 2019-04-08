@@ -77,9 +77,9 @@ public class Driver {
             Class.forName(driver);
             if(myConn == null){
                  Connection myConn = DriverManager.getConnection(url,user,pass);
+                 System.out.println("Reconnected to database: " + db);
             }
-            System.out.println("Connected to database: " + db);
-            
+                        
             //2. Create a statement
             Statement myStmt = myConn.createStatement();
             
@@ -107,8 +107,9 @@ public class Driver {
             Class.forName(driver);
             if(myConn == null){
                  Connection myConn = DriverManager.getConnection(url,user,pass);
+                 System.out.println("Reconnected to database: " + db);
             }
-            System.out.println("Connected to database: " + db);
+            
             
             //2. Create a statement
             Statement myStmt = myConn.createStatement();
@@ -133,9 +134,10 @@ public class Driver {
             Class.forName(driver);
             if(myConn == null){
                  Connection myConn = DriverManager.getConnection(url,user,pass);
+                 System.out.println("Reconnected to database: " + db);
             }
            
-            System.out.println("Connected to database: " + db);
+           
             
             //2. Create a statement
             Statement myStmt = myConn.createStatement();
@@ -144,6 +146,8 @@ public class Driver {
             ResultSet myRs = myStmt.executeQuery(query);
             
             //4. Return the result
+            
+            
            
            while(myRs.next()){
                if(myRs.getString(colToCheck).equals(stringToCheck)){
@@ -165,8 +169,9 @@ public class Driver {
             Class.forName(driver);
             if(myConn == null){
                  Connection myConn = DriverManager.getConnection(url,user,pass);
+                 System.out.println("Reconnected to database: " + db);
             }
-            System.out.println("Connected to database: " + db);
+            
             
             //2. Create a statement
             Statement myStmt = myConn.createStatement();
