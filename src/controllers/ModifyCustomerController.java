@@ -79,7 +79,7 @@ public class ModifyCustomerController implements Initializable {
         setNewInfo();
         checkCountry();
         checkCity();
-        //updateAll();
+        updateAll();
         returnToAllCustomers();
     }
     
@@ -253,13 +253,13 @@ public class ModifyCustomerController implements Initializable {
                 ;
 
             String updateAddressString =
-                "update address set address=" + q + currentCust.getAddressOne() + q 
+                "update address set address=" + q + currentCust.getAddressOne() + q + com
                 + "address2=" + q + currentCust.getAddressTwo() + q + com
                 +"cityId=" + q + currentCust.getCityId() + q + com
-                +"postalCode=" + currentCust.getPostalCode() + q + com
+                +"postalCode=" + q + currentCust.getPostalCode() + q + com
                 +"phone=" + q + currentCust.getPhone() + q + com
                 +"lastUpdate= NOW() " + com
-                +"lastUpdatedBy=" + q + dbDriver.getCurrentAdmin() + q + semi
+                +"lastUpdateBy=" + q + dbDriver.getCurrentAdmin() + q + semi
                     
                 //End of string    
                 ;
