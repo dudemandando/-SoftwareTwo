@@ -5,12 +5,12 @@
         <group>
             <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/NewCustomerController.java</file>
             <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/AllCustomersViewController.java</file>
-            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/views/modifyCustomerView.fxml</file>
             <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/LoginViewController.java</file>
+            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/softwaretwo/Driver.java</file>
             <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/MainMenuViewController.java</file>
             <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/ModifyCustomerController.java</file>
-            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/softwaretwo/Driver.java</file>
             <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/softwaretwo/Customer.java</file>
+            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/views/AllCustomersView.fxml</file>
         </group>
     </open-files>
 </project-private>

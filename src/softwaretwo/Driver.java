@@ -162,6 +162,41 @@ public class Driver {
         return false;
     }
     
+     public static int queryCheckIfExistsWithValue(String query, String stringToCheck, String colToCheck) throws SQLException{
+        try{
+            //1.Get a connection to the database
+            
+            Class.forName(driver);
+            if(myConn == null){
+                 Connection myConn = DriverManager.getConnection(url,user,pass);
+                 System.out.println("Reconnected to database: " + db);
+            }
+           
+           
+            
+            //2. Create a statement
+            Statement myStmt = myConn.createStatement();
+            
+            //3. Execute SQL Query
+            ResultSet myRs = myStmt.executeQuery(query);
+            
+            //4. Return the result
+            
+            
+           
+           while(myRs.next()){
+               if(myRs.getString(colToCheck).equals(stringToCheck)){
+                   return myRs.getInt(colToCheck);
+               }
+           }
+        }
+        catch(Exception exc){
+            exc.printStackTrace();
+            
+        }
+        return Integer.MAX_VALUE;
+    }
+    
     public static int getIdOfValue(String query, String colToCheck){
         try{
             //1.Get a connection to the database
@@ -193,6 +228,9 @@ public class Driver {
         }
         return 0;
     }
+    
+    
+    
     
    
     

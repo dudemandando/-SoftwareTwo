@@ -75,10 +75,11 @@ public class ModifyCustomerController implements Initializable {
     @FXML
     public void onSaveButton() throws SQLException{
         System.out.println("Modify Customer Save Button");
-        determineActivity();
+        //determineActivity();
         setNewInfo();
-        checkCityAndCountry();
-        updateAll();
+        checkCountry();
+        checkCity();
+        //updateAll();
         returnToAllCustomers();
     }
     
@@ -163,18 +164,12 @@ public class ModifyCustomerController implements Initializable {
         
     }
     
-    private void checkCityAndCountry() throws SQLException{
-        
-       //Check the City
-       String cityQuery = "select * from city where city= " + q + currentCust.getCity() + q + ";";
-       isExisitingCity = dbDriver.queryCheckIfExists(cityQuery, currentCust.getCity(), "city");
-      
+    private void checkCountry() throws SQLException{
        //Check the Country
        String countryQuery = "select * from country where country = " + q + currentCust.getCountry() + q + ";";
        isExisitingCountry = dbDriver.queryCheckIfExists(countryQuery, currentCust.getCountry(), "country");
-       
-       System.out.println("Does City exisit? " + currentCust.getCity() + " : " + isExisitingCity);
-       System.out.println("Does City exisit? " + currentCust.getCountry() + " : " + isExisitingCountry);
+
+       System.out.println("Does Country exisit? " + currentCust.getCountry() + " : " + isExisitingCountry);
        
        if(!isExisitingCountry){
            
@@ -195,16 +190,23 @@ public class ModifyCustomerController implements Initializable {
            
            
        }
-       //Retrieve the CoutnryId and set it
-       System.out.println("THE COUNTRY ID for " + currentCust.getCountry() +": " + dbDriver.getIdOfValue(countryQuery, "countryId"));
-        System.out.println("The country query is: " + countryQuery);
-         
-       
+       //Retrieve the CoutnryId and set it      
        currentCust.setCountryId(dbDriver.getIdOfValue(countryQuery, "countryId"));
+       System.out.println("The Country Id set is: " + currentCust.getCountryId());
+    }
+    
+    private void checkCity() throws SQLException{
+        
+        
+        
+        //Check the City
+       String cityQuery = "select * from city where city= " + q + currentCust.getCity() + q + ";";
+       isExisitingCity = dbDriver.queryCheckIfExists(cityQuery, currentCust.getCity(), "city");
+       
+       System.out.println("Does City exisit " + currentCust.getCity() + "? : " + isExisitingCity);
        
        
-
-        //Check and get Id's as needed
+         //Check and get Id's as needed
        if(!isExisitingCity){
                 
            String addCityQuery = "insert into city (city, countryId, createDate, createdBy, lastUpdate, lastUpdateby)";
@@ -219,13 +221,14 @@ public class ModifyCustomerController implements Initializable {
                    //End of String
                    ;
            //Add the new City
-           //dbDriver.queryNoReturn(addCityQuery + valuesQuery);
+           System.out.println("Adding the city");
+           dbDriver.queryNoReturn(addCityQuery + valuesQuery);
            
        }
        
        //Retrieve the CityId
-       //currentCust.setCityId(dbDriver.getIdOfValue(currentCust.getCity(), "cityId"));
-       
+       currentCust.setCityId(dbDriver.getIdOfValue(cityQuery, "cityId"));
+       System.out.println("The new city Id is: " + currentCust.getCityId());
     }
 
     private int determineActivity(){
