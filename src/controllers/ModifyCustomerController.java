@@ -75,7 +75,7 @@ public class ModifyCustomerController implements Initializable {
     @FXML
     public void onSaveButton() throws SQLException{
         System.out.println("Modify Customer Save Button");
-        //determineActivity();
+        determineActivity();
         setNewInfo();
         checkCountry();
         checkCity();
@@ -247,7 +247,8 @@ public class ModifyCustomerController implements Initializable {
     private void updateAll() throws SQLException{
         
         String updateCustomerString =
-                "update customer set customerName="+ q +  currentCust.getCustomerName() + q
+                "update customer set customerName="+ q +  currentCust.getCustomerName() + q + com
+                +"active=" + q + currentCust.getIsActive() + q 
                 +" where customerId=" + currentCust.getCustomerId() + semi
                 //End of String
                 ;
