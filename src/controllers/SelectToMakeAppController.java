@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -107,6 +108,8 @@ public class SelectToMakeAppController implements Initializable {
     private void returnToMain(){
         try{
                 AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/mainMenuView.fxml"));
+                Scene scene = returnToMain.getScene();
+                
                 root.getChildren().setAll(pane);
              }catch(Exception ex){
                 System.out.print(ex);
