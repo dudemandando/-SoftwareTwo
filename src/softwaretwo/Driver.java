@@ -70,7 +70,7 @@ public class Driver {
     }
     
     public static ResultSet queryAndReturn(String query){
-        System.out.println("Query And Return with Query: " + query);
+        //System.out.println("Query And Return with Query: " + query);
         try{
             //1.Get a connection to the database
             
@@ -87,7 +87,7 @@ public class Driver {
             ResultSet myRs = myStmt.executeQuery(query);
             
             //4. Return the result
-           System.out.println("what we got in return");
+           //System.out.println("what we got in return");
            return myRs; 
             
         }

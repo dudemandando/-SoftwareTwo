@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateAppointmentViewController">
-    
+
+<AnchorPane fx:id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.CreateAppointmentViewController">
+   <children>
+      <Text layoutX="180.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a Customer to Create an Appointment" />
+      <Text layoutX="201.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Appointment">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Button fx:id="makeAppButton" layoutX="121.0" layoutY="329.0" mnemonicParsing="false" text="Make Appointment" />
+      <Button fx:id="returnToMain" layoutX="332.0" layoutY="329.0" mnemonicParsing="false" text="Return To Main Menu" />
+      <TableView fx:id="allCustTable" layoutX="34.0" layoutY="98.0" prefHeight="205.0" prefWidth="532.0">
+         <columns>
+            <TableColumn fx:id="colCustomerId"  prefWidth="50.0" text="ID" />
+            <TableColumn fx:id="colCustomerName"  prefWidth="284.0" text="Name" />
+            <TableColumn fx:id="colCustomerLastUpdate" prefWidth="121.0" text="Last Update" />
+         </columns>
+      </TableView>
+   </children>
 </AnchorPane>
