@@ -26,6 +26,7 @@ public class MainMenuViewController implements Initializable {
     @FXML AnchorPane rootPane;
     @FXML Button createNewCustomerViewButton;
     @FXML Button AllCustomersViewButton;
+    @FXML Button createAppointmentButton;
     
     
     
@@ -42,6 +43,17 @@ public class MainMenuViewController implements Initializable {
         
         try{
              AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/NewCustomerView.fxml"));
+            rootPane.getChildren().setAll(pane);
+        }catch(Exception ex){
+        System.out.print(ex);
+        }
+       
+    }
+    
+    @FXML public void CreateAppointmentView(ActionEvent event) throws IOException {
+        
+        try{
+             AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/CreateAppointmentView.fxml"));
             rootPane.getChildren().setAll(pane);
         }catch(Exception ex){
         System.out.print(ex);

@@ -7,17 +7,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.MainMenuViewController">
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainMenuViewController">
    <children>
       <Text layoutX="204.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar App" textAlignment="CENTER">
          <font>
             <Font size="32.0" />
          </font>
       </Text>
-      <Button fx:id="createNewCustomerViewButton" onAction="#newCustomersView"   layoutX="73.0" layoutY="102.0" mnemonicParsing="false" text="Create New" />
-      <Button fx:id="AllCustomersViewButton" onAction="#AllCustomersView"  layoutX="53.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Existing Customer" />
-      <Text layoutX="70.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Customers" />
-      <Text layoutX="79.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Modify" />
+      <Button fx:id="createNewCustomerViewButton" layoutX="72.0" layoutY="134.0" mnemonicParsing="false" onAction="#newCustomersView" text="Create New" />
+      <Button fx:id="AllCustomersViewButton" layoutX="27.0" layoutY="172.0" mnemonicParsing="false" onAction="#AllCustomersView" prefHeight="25.0" prefWidth="169.0" text="Modify Existing Customer" />
+      <Text layoutX="69.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="250.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="createAppointmentButton" onAction="#CreateAppointmentView"   layoutX="244.0" layoutY="134.0" mnemonicParsing="false" text="Create Appointment" />
    </children>
 </AnchorPane>
