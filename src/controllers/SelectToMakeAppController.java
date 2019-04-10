@@ -12,11 +12,13 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import softwaretwo.Customer;
 import softwaretwo.Driver;
 
@@ -25,10 +27,12 @@ import softwaretwo.Driver;
  *
  * @author Megatron
  */
-public class CreateAppointmentViewController implements Initializable {
+public class SelectToMakeAppController implements Initializable {
 
     private Driver dbDriver;
     private ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
+    
+    @FXML AnchorPane root;
     @FXML TableView<Customer> allCustTable;
     @FXML TableColumn <Customer, Integer> colCustomerId;
     @FXML TableColumn <Customer, String> colCustomerName;
@@ -37,8 +41,7 @@ public class CreateAppointmentViewController implements Initializable {
     @FXML Button returnToMain;
     
     
-    
-    @Override   
+   @Override   
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println(" Create New Appointment View");
         try{
@@ -81,16 +84,33 @@ public class CreateAppointmentViewController implements Initializable {
         
     }
    
+   @FXML
     private void moveToCreateAppointment(){
+        System.out.println("selected customer");
         if(allCustomers.size() >  0){
             
                 Customer selected = allCustTable.getSelectionModel().getSelectedItem();
                 System.out.println(selected.getCustomerName());
                 dbDriver.setCarryCustomer(selected);
-            
+                
+             try{
+                AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/createApp.fxml"));
+                root.getChildren().setAll(pane);
+             }catch(Exception ex){
+                System.out.print(ex);
+            }
+ 
         }
     }
-   
- 
+    
+    @FXML 
+    private void returnToMain(){
+        try{
+                AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/mainMenuView.fxml"));
+                root.getChildren().setAll(pane);
+             }catch(Exception ex){
+                System.out.print(ex);
+            }
+    }
     
 }

@@ -53,7 +53,7 @@ public class MainMenuViewController implements Initializable {
     @FXML public void CreateAppointmentView(ActionEvent event) throws IOException {
         
         try{
-             AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/CreateAppointmentView.fxml"));
+             AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/SelectToMakeApp.fxml"));
             rootPane.getChildren().setAll(pane);
         }catch(Exception ex){
         System.out.print(ex);
