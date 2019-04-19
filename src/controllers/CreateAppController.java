@@ -69,6 +69,8 @@ public class CreateAppController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        updateStartTime();
+        updateEndTime();
         
     }
     
@@ -100,8 +102,12 @@ public class CreateAppController implements Initializable {
     }
     
     @FXML
-    private void updateStartEndTime(){
-        System.out.println(startTimeSlider.valueProperty().doubleValue());
+    private void updateStartTime(){
+        startTimeVal.textProperty().set(Double.toString(startTimeSlider.valueProperty().doubleValue()));
     }
     
+    @FXML
+    private void updateEndTime(){
+        endTimeVal.textProperty().set(Double.toString(endTimeSlider.valueProperty().doubleValue()));
+    }
 }
