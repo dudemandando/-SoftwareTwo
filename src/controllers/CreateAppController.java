@@ -13,10 +13,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import softwaretwo.Appointment;
 import softwaretwo.Customer;
 
@@ -44,6 +46,14 @@ public class CreateAppController implements Initializable {
    
    @FXML DatePicker startDate;
    @FXML DatePicker endDate;
+   
+   @FXML Slider startTimeSlider;
+   @FXML Slider endTimeSlider;
+   
+   @FXML Text startTimeVal;
+   @FXML Text endTimeVal;
+   
+   
    
    @FXML Button createAppButton;
    @FXML Button cancelButton;
@@ -87,6 +97,11 @@ public class CreateAppController implements Initializable {
 //       String addAppString = "INSET INTO appointment (customerId, title, description, location, contact, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
 //               "VALUES (" +
 //               ;
+    }
+    
+    @FXML
+    private void updateStartEndTime(){
+        System.out.println(startTimeSlider.valueProperty().doubleValue());
     }
     
 }
