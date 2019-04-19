@@ -7,39 +7,38 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" minHeight="500.0" minWidth="714.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.CreateAppController">
+<AnchorPane fx:id="root" minHeight="500.0" minWidth="714.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateAppController">
    <children>
-      <TableView id="existingAppTable" layoutX="92.0" layoutY="376.0" prefHeight="101.0" prefWidth="530.0">
+      <TableView fx:id="existingAppTable" layoutX="92.0" layoutY="376.0" prefHeight="101.0" prefWidth="530.0">
         <columns>
-          <TableColumn prefWidth="98.0" text="Location" />
-          <TableColumn prefWidth="70.0" text="Start" />
-            <TableColumn prefWidth="63.0" text="End" />
-            <TableColumn prefWidth="185.0" text="Description" />
-            <TableColumn prefWidth="113.0" text="Last Update" />
+          <TableColumn fx:id="locationCol" prefWidth="98.0" text="Location" />
+          <TableColumn fx:id="startCol" prefWidth="70.0" text="Start" />
+            <TableColumn fx:id="endCol" prefWidth="63.0" text="End" />
+            <TableColumn fx:id="descriptionCol" prefWidth="185.0" text="Description" />
+            <TableColumn fx:id="lastUpdateCol" prefWidth="113.0" text="Last Update" />
         </columns>
       </TableView>
       <Text layoutX="299.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Existing Appointments" />
-      <Text layoutX="228.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Appointment">
+      <Text layoutX="228.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Appointment">
          <font>
             <Font size="29.0" />
          </font>
       </Text>
-      <TextField layoutX="176.0" layoutY="67.0" />
+      <TextField fx:id="titleField" layoutX="176.0" layoutY="67.0" />
       <Text layoutX="92.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" />
       <Text layoutX="92.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-      <TextField layoutX="176.0" layoutY="107.0" />
-      <TextField layoutX="176.0" layoutY="146.0" />
+      <TextField fx:id="descField" layoutX="176.0" layoutY="107.0" />
+      <TextField fx:id="locationField" layoutX="176.0" layoutY="146.0" />
       <Text layoutX="92.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Locatioin" />
       <Text layoutX="92.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact" />
-      <TextField layoutX="176.0" layoutY="184.0" />
-      <TextField layoutX="176.0" layoutY="220.0" />
+      <TextField fx:id="contactField" layoutX="176.0" layoutY="184.0" />
+      <TextField fx:id="urlField" layoutX="176.0" layoutY="220.0" />
       <Text layoutX="92.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Url" />
       <Text layoutX="383.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
       <Text layoutX="385.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End" />
-      <DatePicker layoutX="448.0" layoutY="95.0" />
-      <DatePicker layoutX="448.0" layoutY="171.0" />
-      <Button layoutX="201.0" layoutY="286.0" mnemonicParsing="false" text="Create Appointment" />
-      <Button layoutX="371.0" layoutY="286.0" mnemonicParsing="false" text="Cancel" />
+      <DatePicker fx:id="startDate" layoutX="448.0" layoutY="95.0" />
+      <DatePicker fx:id="endDate" layoutX="448.0" layoutY="171.0" />
+      <Button fx:id="createAppButton" layoutX="201.0" layoutY="286.0" mnemonicParsing="false" onAction="#addAppointment" text="Create Appointment" />
+      <Button fx:id="cancelButton" layoutX="371.0" layoutY="286.0" mnemonicParsing="false" text="Cancel" />
    </children>
 </AnchorPane>
