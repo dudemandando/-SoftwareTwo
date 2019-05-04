@@ -104,6 +104,24 @@ public class SelectToMakeAppController implements Initializable {
         }
     }
     
+    @FXML
+    private void moveToEditRemoveAppointment(){
+        if(allCustomers.size() >  0){
+            
+                Customer selected = allCustTable.getSelectionModel().getSelectedItem();
+                System.out.println(selected.getCustomerName());
+                dbDriver.setCarryCustomer(selected);
+                
+             try{
+                AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/EditAppView.fxml"));
+                root.getChildren().setAll(pane);
+             }catch(Exception ex){
+                System.out.print(ex);
+            }
+ 
+        }
+    }
+    
     @FXML 
     private void returnToMain(){
         try{

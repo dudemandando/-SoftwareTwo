@@ -26,6 +26,6 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="createAppointmentButton" onAction="#CreateAppointmentView"   layoutX="244.0" layoutY="134.0" mnemonicParsing="false" text="Create Appointment" />
+      <Button fx:id="createAppointmentButton" layoutX="244.0" layoutY="134.0" mnemonicParsing="false" onAction="#CreateAppointmentView" text="Create/Edit Appointment" />
    </children>
 </AnchorPane>
