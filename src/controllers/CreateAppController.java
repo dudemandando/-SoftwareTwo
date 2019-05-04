@@ -21,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import softwaretwo.Appointment;
 import softwaretwo.Customer;
+import softwaretwo.Driver;
 
 /**
  * FXML Controller class
@@ -58,6 +59,8 @@ public class CreateAppController implements Initializable {
    @FXML Button createAppButton;
    @FXML Button cancelButton;
    
+   private Driver dbDriver;
+   
     private char q = '"';
     private char semi = ';';
     private char com = ',';
@@ -73,7 +76,7 @@ public class CreateAppController implements Initializable {
         
     }
     
-    private void formatDate(String timeVal, boolean isStart){
+    private String formatDate(String timeVal, boolean isStart){
         //Get the Dates and format correctly
         //yyyy-mm-dd hh:mm:ss
         
@@ -85,6 +88,7 @@ public class CreateAppController implements Initializable {
         }
         
         System.out.println("THE FORMATTED DATE IS: " + appTime);
+        return appTime;
     }
     
 //    private setAppValues(){
@@ -99,14 +103,24 @@ public class CreateAppController implements Initializable {
     
     @FXML
     private void addAppointment(){
-        formatDate(startTimeVal.textProperty().toString(), true);
-        formatDate(endTimeVal.textProperty().toString(), false);
-        
-        
-        
-//       String addAppString = "INSET INTO appointment (customerId, title, description, location, contact, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
-//               "VALUES (" +
-//               ;
+  
+       String addAppString = "INSERT INTO appointment (appointment.customerId, appointment.title, appointment.appDesc, appointment.location, appointment.contact, appointment.url, appointment.start, appointment.end, appointment.createDate, appointment.createdBy, appointment.lastUpdate, appointment.lastUpdateBy) " +
+               "VALUES (" +
+               dbDriver.getCarryCustomer().getCustomerId() + com +
+               q+titleField.getText()+q + com +
+               q+descField.getText()+q + com +
+               q+locationField.getText() +q + com+
+               q+contactField.getText()+q + com +
+               q+urlField.getText()+q + com +
+               q+ formatDate(startTimeVal.textProperty().toString(), true)+ q + com +
+               q+ formatDate(endTimeVal.textProperty().toString(), false) +q + com +
+               "now()" + com +
+               q+dbDriver.getCurrentAdmin()+ q + com +
+               "now()" + com +
+               q+dbDriver.getCurrentAdmin() + q + ");";   
+       
+       System.out.println(addAppString);
+               
     }
     
     @FXML
