@@ -33,6 +33,10 @@ public class Driver {
         Driver.carryCustomer = carryCustomer;
     }
     
+    public static void nullOutCarryCustomer(){
+        Driver.carryCustomer = null;
+    }
+    
     public static void getConnection() throws SQLException, ClassNotFoundException{
             Class.forName(driver);
             myConn = DriverManager.getConnection(url,user,pass);

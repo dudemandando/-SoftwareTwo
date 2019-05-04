@@ -165,6 +165,8 @@ public class CreateAppController implements Initializable {
         try{
              AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/SelectToMakeApp.fxml"));
             root.getChildren().setAll(pane);
+            dbDriver.nullOutCarryCustomer();
+            
         }catch(Exception ex){
         System.out.print(ex);
         }
