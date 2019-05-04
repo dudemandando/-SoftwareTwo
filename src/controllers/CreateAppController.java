@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -71,8 +72,7 @@ public class CreateAppController implements Initializable {
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     private Appointment app;
     
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb)  {
         initTimes();
@@ -158,6 +158,16 @@ public class CreateAppController implements Initializable {
        
        System.out.println(addAppString);
                
+    }
+    
+    @FXML
+    private void cancel(){
+        try{
+             AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/SelectToMakeApp.fxml"));
+            root.getChildren().setAll(pane);
+        }catch(Exception ex){
+        System.out.print(ex);
+        }
     }
     
     @FXML
