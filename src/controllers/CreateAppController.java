@@ -59,8 +59,6 @@ public class CreateAppController implements Initializable {
    @FXML Text startTimeVal;
    @FXML Text endTimeVal;
    
-   
-   
    @FXML Button createAppButton;
    @FXML Button cancelButton;
    
@@ -193,17 +191,6 @@ public class CreateAppController implements Initializable {
         
     }
     
-    private void iniTimes(){
-        //updates the end time text value text on the screen to show the time the user has selected, converts to a time value
-        Double doubMinsVal = endTimeSlider.valueProperty().doubleValue() % 1;
-        doubMinsVal = doubMinsVal * 60;
-        Integer intMinsVal = doubMinsVal.intValue();
-      
-        //System.out.println("min Value is:" + intMinsVal);
-        String timeSring = Integer.toString(endTimeSlider.valueProperty().intValue()) + ":" + intMinsVal + ":00";
-        
-        endTimeVal.textProperty().set(timeSring);
-    }
     
     private void initTimes(){
         
