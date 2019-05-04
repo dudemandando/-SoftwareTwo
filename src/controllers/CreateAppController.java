@@ -103,11 +103,35 @@ public class CreateAppController implements Initializable {
     
     @FXML
     private void updateStartTime(){
-        startTimeVal.textProperty().set(Double.toString(startTimeSlider.valueProperty().doubleValue()));
+        //updates the start time text value text on the screen to show the time the user has selected
+//        startTimeVal.textProperty().set(Double.toString(startTimeSlider.valueProperty().doubleValue()));
+        
+         //updates the end time text value text on the screen to show the time the user has selected
+        Double doubMinsVal = startTimeSlider.valueProperty().doubleValue() % 1;
+        doubMinsVal = doubMinsVal * 60;
+        Integer intMinsVal = doubMinsVal.intValue();
+      
+        //System.out.println("min Value is:" + intMinsVal);
+        String timeSring = Integer.toString(startTimeSlider.valueProperty().intValue()) + ":" + intMinsVal + ":00";
+        
+        startTimeVal.textProperty().set(timeSring);
     }
     
     @FXML
     private void updateEndTime(){
-        endTimeVal.textProperty().set(Double.toString(endTimeSlider.valueProperty().doubleValue()));
+        //updates the end time text value text on the screen to show the time the user has selected
+        Double doubMinsVal = endTimeSlider.valueProperty().doubleValue() % 1;
+        doubMinsVal = doubMinsVal * 60;
+        Integer intMinsVal = doubMinsVal.intValue();
+      
+        //System.out.println("min Value is:" + intMinsVal);
+        String timeSring = Integer.toString(endTimeSlider.valueProperty().intValue()) + ":" + intMinsVal + ":00";
+        
+        endTimeVal.textProperty().set(timeSring);
+    }
+    
+    private void convertSliderToActualTime(){
+        //Takes the double slider value and converts to a time that can be put into the database
+        
     }
 }
