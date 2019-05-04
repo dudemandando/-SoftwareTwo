@@ -6,7 +6,11 @@
 package controllers;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +21,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import softwaretwo.Appointment;
@@ -71,8 +76,14 @@ public class CreateAppController implements Initializable {
     
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)  {
         initTimes();
+        
+       try {
+           getAllAppointments();
+       } catch (SQLException ex) {
+           Logger.getLogger(CreateAppController.class.getName()).log(Level.SEVERE, null, ex);
+       }
         
     }
     
@@ -87,17 +98,45 @@ public class CreateAppController implements Initializable {
             appTime = endDate.valueProperty().getValue().toString() + " " + endTimeVal.getText();
         }
         
-        System.out.println("THE FORMATTED DATE IS: " + appTime);
+        //System.out.println("THE FORMATTED DATE IS: " + appTime);
         return appTime;
     }
-    
-//    private setAppValues(){
-//        app = new Appointment(dbDriver.getCarryCustomer().getCustomerId(), descField.getText(), locationField.getText(), contactField.getText(), urlField.getText(), String start, String end, String createdBy, String lastUpdate, String lastUpdateBy)
-//    }
-    
-    
-    private void getAllAppointments(){
+
+    private void getAllAppointments() throws SQLException{
+        String allAppsString = "select * from appointment where customerId = " + dbDriver.getCarryCustomer().getCustomerId() + ";";
         
+        System.out.println(allAppsString);
+        ResultSet result = dbDriver.queryAndReturn(allAppsString);
+        
+        while(result.next()){
+            
+            Appointment entry;
+            entry = new Appointment(result.getInt("appointmentId"),
+                    result.getInt("customerId"),
+                    result.getString("appDesc"),
+                    result.getString("location"),
+                    result.getString("Contact"),
+                    result.getString("url"),
+                    result.getString("start"),
+                    result.getString("end"),
+                    result.getString("createDate"),
+                    result.getString("createdBy"),
+                    result.getString("lastUpdate"),
+                    result.getString("lastUpdateBy")
+            );
+            allAppointments.add(entry);
+
+        }
+        
+//        //populate the table
+        locationCol.setCellValueFactory(new PropertyValueFactory  ("location"));
+        startCol.setCellValueFactory(new PropertyValueFactory <Appointment, String> ("start"));
+        endCol.setCellValueFactory(new PropertyValueFactory <Appointment, String> ("end"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory <Appointment, String> ("descrip"));
+        lastUpdateCol.setCellValueFactory(new PropertyValueFactory <Appointment, String> ("lastUpdate"));
+        
+        existingAppTable.setItems(allAppointments);
+        existingAppTable.refresh();
         
     }
     

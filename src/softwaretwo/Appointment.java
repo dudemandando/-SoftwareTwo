@@ -20,11 +20,12 @@ public class Appointment {
     private String start;
     private String end;
     private String createdBy;
+    private String createDate;
     private String lastUpdate;
     private String lastUpdateBy;
-    
-    public Appointment(Integer custId, String descrip, String location, String contact, String url, String start, String end, String createdBy, String lastUpdate, String lastUpdateBy) {
-        
+
+    public Appointment(Integer appId, Integer custId, String descrip, String location, String contact, String url, String start, String end, String createdBy, String createDate, String lastUpdate, String lastUpdateBy) {
+        this.appId = appId;
         this.custId = custId;
         this.descrip = descrip;
         this.location = location;
@@ -33,9 +34,14 @@ public class Appointment {
         this.start = start;
         this.end = end;
         this.createdBy = createdBy;
+        this.createDate = createDate;
         this.lastUpdate = lastUpdate;
         this.lastUpdateBy = lastUpdateBy;
     }
+
+    
+    
+    
     
 
     public Integer getAppId() {
