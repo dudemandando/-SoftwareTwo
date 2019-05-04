@@ -69,16 +69,22 @@ public class CreateAppController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        updateStartTime();
-        updateEndTime();
+        initTimes();
         
     }
     
-    private void formatDate(){
+    private void formatDate(String timeVal, boolean isStart){
         //Get the Dates and format correctly
         //yyyy-mm-dd hh:mm:ss
         
-        System.out.println("THE CURRENT DATE IS: " + startDate.getValue().toString());
+        String appTime; 
+        if(isStart){
+            appTime = startDate.valueProperty().getValue().toString() + " " + startTimeVal.getText();
+        }else{
+            appTime = endDate.valueProperty().getValue().toString() + " " + endTimeVal.getText();
+        }
+        
+        System.out.println("THE FORMATTED DATE IS: " + appTime);
     }
     
 //    private setAppValues(){
@@ -93,7 +99,9 @@ public class CreateAppController implements Initializable {
     
     @FXML
     private void addAppointment(){
-        formatDate();
+        formatDate(startTimeVal.textProperty().toString(), true);
+        formatDate(endTimeVal.textProperty().toString(), false);
+        
         
         
 //       String addAppString = "INSET INTO appointment (customerId, title, description, location, contact, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
@@ -103,10 +111,8 @@ public class CreateAppController implements Initializable {
     
     @FXML
     private void updateStartTime(){
-        //updates the start time text value text on the screen to show the time the user has selected
-//        startTimeVal.textProperty().set(Double.toString(startTimeSlider.valueProperty().doubleValue()));
+        //updates the start time text value text on the screen to show the time the user has selected, converts to a time value string
         
-         //updates the end time text value text on the screen to show the time the user has selected
         Double doubMinsVal = startTimeSlider.valueProperty().doubleValue() % 1;
         doubMinsVal = doubMinsVal * 60;
         Integer intMinsVal = doubMinsVal.intValue();
@@ -115,11 +121,27 @@ public class CreateAppController implements Initializable {
         String timeSring = Integer.toString(startTimeSlider.valueProperty().intValue()) + ":" + intMinsVal + ":00";
         
         startTimeVal.textProperty().set(timeSring);
+        
     }
     
     @FXML
     private void updateEndTime(){
-        //updates the end time text value text on the screen to show the time the user has selected
+        //updates the end time text value text on the screen to show the time the user has selected, converts to a time value
+        Double doubMinsVal = endTimeSlider.valueProperty().doubleValue() % 1;
+        doubMinsVal = doubMinsVal * 60;
+        Integer intMinsVal = doubMinsVal.intValue();
+      
+        //System.out.println("min Value is:" + intMinsVal);
+        String timeSring = Integer.toString(endTimeSlider.valueProperty().intValue()) + ":" + intMinsVal + ":00";
+        
+        endTimeVal.textProperty().set(timeSring);
+        
+ 
+        
+    }
+    
+    private void iniTimes(){
+        //updates the end time text value text on the screen to show the time the user has selected, converts to a time value
         Double doubMinsVal = endTimeSlider.valueProperty().doubleValue() % 1;
         doubMinsVal = doubMinsVal * 60;
         Integer intMinsVal = doubMinsVal.intValue();
@@ -130,8 +152,11 @@ public class CreateAppController implements Initializable {
         endTimeVal.textProperty().set(timeSring);
     }
     
-    private void convertSliderToActualTime(){
-        //Takes the double slider value and converts to a time that can be put into the database
+    private void initTimes(){
         
+        startTimeVal.textProperty().set(Double.toString(startTimeSlider.valueProperty().doubleValue()));
+        endTimeVal.textProperty().set(Double.toString(endTimeSlider.valueProperty().doubleValue()));
     }
+    
+
 }
