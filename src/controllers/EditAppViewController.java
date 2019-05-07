@@ -100,6 +100,21 @@ public class EditAppViewController implements Initializable {
         }
     }
     
+    private String formatDate(String timeVal, boolean isStart){
+        //Get the Dates and format correctly
+        //yyyy-mm-dd hh:mm:ss
+        
+        String appTime; 
+        if(isStart){
+            appTime = startDate.valueProperty().getValue().toString() + " " + startTimeVal.getText();
+        }else{
+            appTime = endDate.valueProperty().getValue().toString() + " " + endTimeVal.getText();
+        }
+        
+        //System.out.println("THE FORMATTED DATE IS: " + appTime);
+        return appTime;
+    }
+    
     private void getAllAppointments() throws SQLException{
         String allAppsString = "select * from appointment where customerId = " + dbDriver.getCarryCustomer().getCustomerId() + ";";
         
@@ -169,8 +184,22 @@ public class EditAppViewController implements Initializable {
     }
     
     @FXML 
-    private void save(){
-        //String saveAppQuery = "UPDATE appointment set "
+    private void save() throws SQLException{
+        System.out.println("Updating Appointment Record");
+        String saveAppQuery = "UPDATE appointment set "
+                + "appointment.title = " + q + titleField.getText() + q + com +
+                "appointment.appDesc = " + q +descField.getText() + q + com +
+                "appointment.location = " + q +locationField.getText() + q + com +
+                "appointment.contact = " + q +locationField.getText() + q + com +
+                "appointment.url = " + q +locationField.getText() + q + com +
+                "appointment.start = " + q + formatDate(startTimeVal.getText(), true) + q + com +
+                "appointment.end = " + q + formatDate(endTimeVal.getText(), true) + q + com +
+                "appointment.lastUpdate = now()," + 
+                "appointment.lastUpdateBy = " + q +dbDriver.getCurrentAdmin()+ q + " WHERE appointmentId = " + selected.getAppId() + ";";
+        
+        System.out.println(saveAppQuery);
+        dbDriver.queryNoReturn(saveAppQuery);
+        
     }
     
     @FXML
@@ -194,6 +223,7 @@ public class EditAppViewController implements Initializable {
         Date date;
         String hourString;
         String minString;
+        
         if(isStart){
             date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
         }else{
@@ -219,15 +249,14 @@ public class EditAppViewController implements Initializable {
             endTimeSlider.setValue(sliderVal);
             
         }
-        
-        //System.out.println("THE TIME IS: " + hourString + " and mins "+ minString);
-        
+      
         
     }
     
     private void setDate(boolean isStart) throws ParseException{
         Date date;
         String dateString;
+        
         if(isStart){
             date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
             dateString = new SimpleDateFormat("yyy-MM-dd").format(date);

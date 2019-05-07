@@ -111,6 +111,7 @@ public class CreateAppController implements Initializable {
             Appointment entry;
             entry = new Appointment(result.getInt("appointmentId"),
                     result.getInt("customerId"),
+                    result.getString("title"),
                     result.getString("appDesc"),
                     result.getString("location"),
                     result.getString("Contact"),
