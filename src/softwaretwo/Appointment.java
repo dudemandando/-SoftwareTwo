@@ -13,6 +13,9 @@ public class Appointment {
     
     private Integer appId;
     private Integer custId;
+
+  
+    private String title;
     private String descrip;
     private String location;
     private String contact;
@@ -23,10 +26,11 @@ public class Appointment {
     private String createDate;
     private String lastUpdate;
     private String lastUpdateBy;
-
-    public Appointment(Integer appId, Integer custId, String descrip, String location, String contact, String url, String start, String end, String createdBy, String createDate, String lastUpdate, String lastUpdateBy) {
+    
+    public Appointment(Integer appId, Integer custId, String title, String descrip, String location, String contact, String url, String start, String end, String createdBy, String createDate, String lastUpdate, String lastUpdateBy) {
         this.appId = appId;
         this.custId = custId;
+        this.title = title;
         this.descrip = descrip;
         this.location = location;
         this.contact = contact;
@@ -38,11 +42,14 @@ public class Appointment {
         this.lastUpdate = lastUpdate;
         this.lastUpdateBy = lastUpdateBy;
     }
+    
+      public String getTitle() {
+        return title;
+    }
 
-    
-    
-    
-    
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public Integer getAppId() {
         return appId;
@@ -116,6 +123,14 @@ public class Appointment {
         this.createdBy = createdBy;
     }
 
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
     public String getLastUpdate() {
         return lastUpdate;
     }
@@ -132,23 +147,6 @@ public class Appointment {
         this.lastUpdateBy = lastUpdateBy;
     }
     
-    
-
-    public Appointment(Integer appId, Integer custId, String descrip, String location, String contact, String url, String start, String end, String createdBy, String lastUpdate, String lastUpdateBy) {
-        this.appId = appId;
-        this.custId = custId;
-        this.descrip = descrip;
-        this.location = location;
-        this.contact = contact;
-        this.url = url;
-        this.start = start;
-        this.end = end;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdateBy = lastUpdateBy;
-    }
-    
-    
-    
+        
     
 }

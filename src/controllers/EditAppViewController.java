@@ -63,6 +63,7 @@ public class EditAppViewController implements Initializable {
    @FXML Button cancelButton;
    
    private Driver dbDriver;
+   private Appointment selected;
     
    private char q = '"';
     private char semi = ';';
@@ -103,6 +104,7 @@ public class EditAppViewController implements Initializable {
             Appointment entry;
             entry = new Appointment(result.getInt("appointmentId"),
                     result.getInt("customerId"),
+                    result.getString("title"),
                     result.getString("appDesc"),
                     result.getString("location"),
                     result.getString("Contact"),
@@ -163,7 +165,20 @@ public class EditAppViewController implements Initializable {
     
     @FXML 
     private void save(){
+        //String saveAppQuery = "UPDATE appointment set "
+    }
+    
+    @FXML
+    private void populateFieldWithSelected(){
         
+        if(allAppointments.size() > 0){
+           selected =  (Appointment) existingAppTable.getSelectionModel().getSelectedItem();
+           titleField.setText(selected.getTitle());
+           descField.setText(selected.getDescrip());
+           locationField.setText(selected.getLocation());
+           contactField.setText(selected.getContact());
+           urlField.setText(selected.getUrl());
+        }
     }
     
 }

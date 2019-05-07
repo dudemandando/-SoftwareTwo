@@ -3,17 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/NewCustomerController.java</file>
-            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/CreateAppController.java</file>
-            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/AllCustomersViewController.java</file>
             <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/LoginViewController.java</file>
-            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/softwaretwo/Appointment.java</file>
-            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/views/createApp.fxml</file>
-            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/SelectToMakeAppController.java</file>
-            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/softwaretwo/Driver.java</file>
+            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/EditAppViewController.java</file>
             <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/MainMenuViewController.java</file>
             <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/controllers/ModifyCustomerController.java</file>
-            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/softwaretwo/Customer.java</file>
+            <file>file:/C:/Users/Megatron/Documents/-SoftwareTwo/src/views/EditAppView.fxml</file>
         </group>
     </open-files>
 </project-private>
