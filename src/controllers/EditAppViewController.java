@@ -186,24 +186,34 @@ public class EditAppViewController implements Initializable {
            contactField.setText(selected.getContact());
            urlField.setText(selected.getUrl());
            
-           setTime();
-           setDate();
-           
+           setTime(true);
+           setTime(false);
+           setDate(true);
+           setDate(false);
            
         }
     }
     
-    private void setTime() throws ParseException{
+    private void setTime(boolean isStart) throws ParseException{
         Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
-        String timeString = new SimpleDateFormat("H:mm").format(date);
-        System.out.println("THE TIME IS: " + timeString);
+        String hourString = new SimpleDateFormat("HH").format(date);
+        String minString = new SimpleDateFormat("mm").format(date);
+        System.out.println("THE TIME IS: " + hourString + " and mins "+ minString);
     }
     
-    private void setDate() throws ParseException{
-        Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
-        String timeString = new SimpleDateFormat("yyy-MM-dd").format(date);
-        System.out.println("THE Date IS: " + timeString);
+    private void setDate(boolean isStart) throws ParseException{
+        Date date;
+        String dateString;
+        if(isStart){
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
+            dateString = new SimpleDateFormat("yyy-MM-dd").format(date);
+            startDate.setValue(LocalDate.parse(dateString));
+        }else{
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getEnd().toString());
+            dateString = new SimpleDateFormat("yyy-MM-dd").format(date);
+            endDate.setValue(LocalDate.parse(dateString));
+        }
+ 
     }
-    
-    
+  
 }
