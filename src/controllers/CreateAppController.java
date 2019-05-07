@@ -158,7 +158,8 @@ public class CreateAppController implements Initializable {
                q+dbDriver.getCurrentAdmin() + q + ");";   
        
        System.out.println(addAppString);
-               
+       dbDriver.queryNoReturn(addAppString);
+       cancel();
     }
     
     @FXML

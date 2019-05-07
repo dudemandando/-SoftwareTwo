@@ -72,9 +72,9 @@ public class SelectToMakeAppController implements Initializable {
                 allCustomers.add(entry);
             }
             
-            for(int i =0; i< allCustomers.size(); i++ ){
-                    System.out.println("Name is: " + allCustomers.get(i).getCustomerName());
-                }
+//            for(int i =0; i< allCustomers.size(); i++ ){
+//                    System.out.println("Name is: " + allCustomers.get(i).getCustomerName());
+//                }
 
         colCustomerName.setCellValueFactory(new PropertyValueFactory  ("customerName"));
         colCustomerId.setCellValueFactory(new PropertyValueFactory <Customer, Integer> ("customerId"));

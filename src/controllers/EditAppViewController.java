@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +43,7 @@ import softwaretwo.Driver;
  */
 public class EditAppViewController implements Initializable {
 
-   @FXML AnchorPane root;
+   @FXML AnchorPane rootPane;
    
    @FXML TableView existingAppTable;
    @FXML TableColumn locationCol;
@@ -86,13 +87,14 @@ public class EditAppViewController implements Initializable {
        } catch (SQLException ex) {
            Logger.getLogger(EditAppViewController.class.getName()).log(Level.SEVERE, null, ex);
        }
+       initTimes();
     } 
     
     @FXML
     private void cancel(){
         try{
              AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/SelectToMakeApp.fxml"));
-            root.getChildren().setAll(pane);
+            rootPane.getChildren().setAll(pane);
             dbDriver.nullOutCarryCustomer();
             
         }catch(Exception ex){
@@ -162,10 +164,21 @@ public class EditAppViewController implements Initializable {
         doubMinsVal = doubMinsVal * 60;
         Integer intMinsVal = doubMinsVal.intValue();
       
+        String timeString;
         //System.out.println("min Value is:" + intMinsVal);
-        String timeSring = Integer.toString(startTimeSlider.valueProperty().intValue()) + ":" + intMinsVal + ":00";
+        if(startTimeSlider.valueProperty().intValue() < 10){
+             timeString = "0" + Integer.toString(startTimeSlider.valueProperty().intValue());
+        }else{
+             timeString = Integer.toString(startTimeSlider.valueProperty().intValue());
+        }
         
-        startTimeVal.textProperty().set(timeSring);
+        if(intMinsVal < 10){
+            timeString = timeString + ":0" + intMinsVal + ":00";
+        }else{
+             timeString = timeString + ":" + intMinsVal + ":00";
+        }
+        
+        startTimeVal.textProperty().set(timeString);
         
     }
     
@@ -176,15 +189,26 @@ public class EditAppViewController implements Initializable {
         doubMinsVal = doubMinsVal * 60;
         Integer intMinsVal = doubMinsVal.intValue();
       
+        String timeString;
         //System.out.println("min Value is:" + intMinsVal);
-        String timeSring = Integer.toString(endTimeSlider.valueProperty().intValue()) + ":" + intMinsVal + ":00";
+        if(endTimeSlider.valueProperty().intValue() < 10){
+             timeString = "0" + Integer.toString(endTimeSlider.valueProperty().intValue());
+        }else{
+             timeString = Integer.toString(endTimeSlider.valueProperty().intValue());
+        }
         
-        endTimeVal.textProperty().set(timeSring);
+        if(intMinsVal < 10){
+            timeString = timeString + ":0" + intMinsVal + ":00";
+        }else{
+             timeString = timeString + ":" + intMinsVal + ":00";
+        }
+        
+        endTimeVal.textProperty().set(timeString);
  
     }
     
     @FXML 
-    private void save() throws SQLException{
+    private void save() throws SQLException, IOException{
         System.out.println("Updating Appointment Record");
         String saveAppQuery = "UPDATE appointment set "
                 + "appointment.title = " + q + titleField.getText() + q + com +
@@ -193,12 +217,17 @@ public class EditAppViewController implements Initializable {
                 "appointment.contact = " + q +locationField.getText() + q + com +
                 "appointment.url = " + q +locationField.getText() + q + com +
                 "appointment.start = " + q + formatDate(startTimeVal.getText(), true) + q + com +
-                "appointment.end = " + q + formatDate(endTimeVal.getText(), true) + q + com +
+                "appointment.end = " + q + formatDate(endTimeVal.getText(), false) + q + com +
                 "appointment.lastUpdate = now()," + 
                 "appointment.lastUpdateBy = " + q +dbDriver.getCurrentAdmin()+ q + " WHERE appointmentId = " + selected.getAppId() + ";";
         
         System.out.println(saveAppQuery);
         dbDriver.queryNoReturn(saveAppQuery);
+        
+        AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/SelectToMakeApp.fxml"));
+        rootPane.getChildren().setAll(pane);
+        dbDriver.nullOutCarryCustomer();
+       
         
     }
     
@@ -212,23 +241,21 @@ public class EditAppViewController implements Initializable {
            locationField.setText(selected.getLocation());
            contactField.setText(selected.getContact());
            urlField.setText(selected.getUrl());
-           
-           setDate(true);
-           setDate(false);
+           System.out.println("Start is: " + selected.getStart());
+           System.out.println("End is: " + selected.getEnd());
+           setDate(selected.getStart(), true);
+           setDate(selected.getEnd(), false);
            
         }
     }
     
-    private void setTime(boolean isStart) throws ParseException{
+    private void setTime(String dateTimeString, boolean isStart) throws ParseException{
         Date date;
         String hourString;
         String minString;
         
-        if(isStart){
-            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
-        }else{
-            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getEnd().toString());
-        }
+        
+        date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTimeString);
         
         hourString = new SimpleDateFormat("HH").format(date);
         minString = new SimpleDateFormat("mm").format(date);
@@ -253,22 +280,30 @@ public class EditAppViewController implements Initializable {
         
     }
     
-    private void setDate(boolean isStart) throws ParseException{
+    private void setDate(String dateTimeString, boolean isStart) throws ParseException{
         Date date;
         String dateString;
         
         if(isStart){
-            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
-            dateString = new SimpleDateFormat("yyy-MM-dd").format(date);
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTimeString);
+            dateString = new SimpleDateFormat("yyyy-MM-dd").format(date);
             startDate.setValue(LocalDate.parse(dateString));
-            setTime(true);
+            setTime(dateTimeString, true);
         }else{
-            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getEnd().toString());
-            dateString = new SimpleDateFormat("yyy-MM-dd").format(date);
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTimeString);
+            dateString = new SimpleDateFormat("yyyy-MM-dd").format(date);
             endDate.setValue(LocalDate.parse(dateString));
-            setTime(false);
+            setTime(dateTimeString, false);
         }
  
+    }
+    
+    private void initTimes(){
+        
+        startTimeVal.textProperty().set(Double.toString(startTimeSlider.valueProperty().doubleValue()));
+        endTimeVal.textProperty().set(Double.toString(endTimeSlider.valueProperty().doubleValue()));
+        updateStartTime();
+        updateEndTime();
     }
   
 }
