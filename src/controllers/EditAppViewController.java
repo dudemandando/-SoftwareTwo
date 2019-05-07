@@ -8,6 +8,13 @@ package controllers;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -169,7 +176,7 @@ public class EditAppViewController implements Initializable {
     }
     
     @FXML
-    private void populateFieldWithSelected(){
+    private void populateFieldWithSelected() throws ParseException{
         
         if(allAppointments.size() > 0){
            selected =  (Appointment) existingAppTable.getSelectionModel().getSelectedItem();
@@ -178,7 +185,23 @@ public class EditAppViewController implements Initializable {
            locationField.setText(selected.getLocation());
            contactField.setText(selected.getContact());
            urlField.setText(selected.getUrl());
+           
+//           SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd hh:m:ss"); 
+//           Date value = dateFormatter.parse(selected.getStart());
+//           System.out.println(value.toString());
+           
+           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+           DateTimeFormatter timeF = DateTimeFormatter.ofPattern("HH:mm:ss");
+           String sDate = formatter.parse(selected.getStart()).toString();
+           String tTime = formatter.parse(selected.getStart()).toString();
+           
+           Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
+           String newString = new SimpleDateFormat("H:mm").format(date);
+           System.out.println("THE TIME IS: " + newString);
+           
         }
     }
+    
+    
     
 }
