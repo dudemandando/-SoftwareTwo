@@ -83,12 +83,12 @@ public class EditAppViewController implements Initializable {
     // operation is implemented using lambda expressions 
     interface FuncInter1 
     { 
-        String operation(String a, String b); 
+        String operation(String a, String b, String c); 
     } 
     
-    private String operate(String a, String b, FuncInter1 fobj) 
+    private String operate(String a, String b, String c, FuncInter1 fobj) 
     { 
-        return fobj.operation(a, b); 
+        return fobj.operation(a, b, c); 
     }
     
     
@@ -174,7 +174,7 @@ public class EditAppViewController implements Initializable {
     @FXML
     private void updateStartTime(){
         //updates the start time text value text on the screen to show the time the user has selected, converts to a time value string
-        FuncInter1 add = (String x, String y)-> x + y;
+        FuncInter1 add = (String x, String y, String z )-> x + y + z;
         
         Double doubMinsVal = startTimeSlider.valueProperty().doubleValue() % 1;
         doubMinsVal = doubMinsVal * 60;
@@ -184,7 +184,7 @@ public class EditAppViewController implements Initializable {
         //System.out.println("min Value is:" + intMinsVal);
         if(startTimeSlider.valueProperty().intValue() < 10){
              
-             timeString =  operate("0", Integer.toString(startTimeSlider.valueProperty().intValue()), add);
+             timeString =  operate("0", Integer.toString(startTimeSlider.valueProperty().intValue()), "", add);
              
         }else{
              timeString = Integer.toString(startTimeSlider.valueProperty().intValue());
@@ -193,10 +193,10 @@ public class EditAppViewController implements Initializable {
         
         if(intMinsVal < 10){
             
-            timeString = timeString + operate(":0",intMinsVal.toString(),add) + ":00";
+            timeString = timeString + operate(":0",intMinsVal.toString(), ":00",add);
         }else{
              //timeString = timeString + ":" + intMinsVal + ":00";
-             timeString = timeString + operate(":",intMinsVal.toString(),add) + ":00";
+             timeString = timeString + operate(":",intMinsVal.toString(), ":00",add);
         }
         
         startTimeVal.textProperty().set(timeString);
@@ -205,7 +205,7 @@ public class EditAppViewController implements Initializable {
     
     @FXML
     private void updateEndTime(){
-        FuncInter1 add = (String x, String y)-> x + y;
+        FuncInter1 add = (String x, String y, String z)-> x + y + z;
         //updates the end time text value text on the screen to show the time the user has selected, converts to a time value
         Double doubMinsVal = endTimeSlider.valueProperty().doubleValue() % 1;
         doubMinsVal = doubMinsVal * 60;
@@ -216,7 +216,7 @@ public class EditAppViewController implements Initializable {
                 
         if(endTimeSlider.valueProperty().intValue() < 10){
              
-             timeString =  operate("0", Integer.toString(endTimeSlider.valueProperty().intValue()), add);
+             timeString =  operate("0", Integer.toString(endTimeSlider.valueProperty().intValue()),"", add);
              
         }else{
              timeString = Integer.toString(endTimeSlider.valueProperty().intValue());
@@ -225,10 +225,10 @@ public class EditAppViewController implements Initializable {
         
         if(intMinsVal < 10){
             
-            timeString = timeString + operate(":0",intMinsVal.toString(),add) + ":00";
+            timeString = timeString + operate(":0",intMinsVal.toString(),":00", add);
         }else{
              //timeString = timeString + ":" + intMinsVal + ":00";
-             timeString = timeString + operate(":",intMinsVal.toString(),add) + ":00";
+             timeString = timeString + operate(":",intMinsVal.toString(),":00",add);
         }
         
         endTimeVal.textProperty().set(timeString);
