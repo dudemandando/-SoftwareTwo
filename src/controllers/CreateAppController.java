@@ -72,6 +72,16 @@ public class CreateAppController implements Initializable {
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     private Appointment app;
     
+    // operation is implemented using lambda expressions 
+    interface FuncInter1 
+    { 
+        String operation(String a, String b, String c); 
+    } 
+    
+    private String operate(String a, String b, String c, FuncInter1 fobj) 
+    { 
+        return fobj.operation(a, b, c); 
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb)  {
@@ -177,32 +187,65 @@ public class CreateAppController implements Initializable {
     @FXML
     private void updateStartTime(){
         //updates the start time text value text on the screen to show the time the user has selected, converts to a time value string
+        FuncInter1 add = (String x, String y, String z )-> x + y + z;
         
         Double doubMinsVal = startTimeSlider.valueProperty().doubleValue() % 1;
         doubMinsVal = doubMinsVal * 60;
         Integer intMinsVal = doubMinsVal.intValue();
       
+        String timeString;
         //System.out.println("min Value is:" + intMinsVal);
-        String timeSring = Integer.toString(startTimeSlider.valueProperty().intValue()) + ":" + intMinsVal + ":00";
+        if(startTimeSlider.valueProperty().intValue() < 10){
+             
+             timeString =  operate("0", Integer.toString(startTimeSlider.valueProperty().intValue()), "", add);
+             
+        }else{
+             timeString = Integer.toString(startTimeSlider.valueProperty().intValue());
+             
+        }
         
-        startTimeVal.textProperty().set(timeSring);
+        if(intMinsVal < 10){
+            
+            timeString = timeString + operate(":0",intMinsVal.toString(), ":00",add);
+        }else{
+             //timeString = timeString + ":" + intMinsVal + ":00";
+             timeString = timeString + operate(":",intMinsVal.toString(), ":00",add);
+        }
+        
+        startTimeVal.textProperty().set(timeString);
         
     }
     
     @FXML
     private void updateEndTime(){
+        FuncInter1 add = (String x, String y, String z)-> x + y + z;
         //updates the end time text value text on the screen to show the time the user has selected, converts to a time value
         Double doubMinsVal = endTimeSlider.valueProperty().doubleValue() % 1;
         doubMinsVal = doubMinsVal * 60;
         Integer intMinsVal = doubMinsVal.intValue();
       
+        String timeString;
         //System.out.println("min Value is:" + intMinsVal);
-        String timeSring = Integer.toString(endTimeSlider.valueProperty().intValue()) + ":" + intMinsVal + ":00";
+                
+        if(endTimeSlider.valueProperty().intValue() < 10){
+             
+             timeString =  operate("0", Integer.toString(endTimeSlider.valueProperty().intValue()),"", add);
+             
+        }else{
+             timeString = Integer.toString(endTimeSlider.valueProperty().intValue());
+             
+        }
         
-        endTimeVal.textProperty().set(timeSring);
+        if(intMinsVal < 10){
+            
+            timeString = timeString + operate(":0",intMinsVal.toString(),":00", add);
+        }else{
+             //timeString = timeString + ":" + intMinsVal + ":00";
+             timeString = timeString + operate(":",intMinsVal.toString(),":00",add);
+        }
         
+        endTimeVal.textProperty().set(timeString);
  
-        
     }
     
     
