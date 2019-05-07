@@ -259,6 +259,18 @@ public class EditAppViewController implements Initializable {
         
     }
     
+    @FXML 
+    private void delete(){
+        
+       if(selected != null){
+           String deleteQuery = "DELETE from appointment where appointment.appointmentId =" + selected.getAppId() + ";";
+           dbDriver.queryNoReturn(deleteQuery);
+           System.out.println("deleted app");
+       }else{
+           System.out.println("Null app selection");
+       }
+    }
+    
     @FXML
     private void populateFieldWithSelected() throws ParseException{
         
