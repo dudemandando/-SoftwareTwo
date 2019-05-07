@@ -165,9 +165,7 @@ public class EditAppViewController implements Initializable {
         String timeSring = Integer.toString(endTimeSlider.valueProperty().intValue()) + ":" + intMinsVal + ":00";
         
         endTimeVal.textProperty().set(timeSring);
-        
  
-        
     }
     
     @FXML 
@@ -186,8 +184,6 @@ public class EditAppViewController implements Initializable {
            contactField.setText(selected.getContact());
            urlField.setText(selected.getUrl());
            
-           setTime(true);
-           setTime(false);
            setDate(true);
            setDate(false);
            
@@ -195,10 +191,38 @@ public class EditAppViewController implements Initializable {
     }
     
     private void setTime(boolean isStart) throws ParseException{
-        Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
-        String hourString = new SimpleDateFormat("HH").format(date);
-        String minString = new SimpleDateFormat("mm").format(date);
-        System.out.println("THE TIME IS: " + hourString + " and mins "+ minString);
+        Date date;
+        String hourString;
+        String minString;
+        if(isStart){
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
+        }else{
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getEnd().toString());
+        }
+        
+        hourString = new SimpleDateFormat("HH").format(date);
+        minString = new SimpleDateFormat("mm").format(date);
+        
+        String timeSring = hourString + ":" + minString + ":00";
+        if(isStart){
+            startTimeVal.textProperty().set(timeSring);
+            Double hourInt = Double.parseDouble(hourString);
+            Double minsDoub = Double.parseDouble(minString) / 60f;
+            Double sliderVal = hourInt + minsDoub;
+            startTimeSlider.setValue(sliderVal);
+            
+        }else{
+            endTimeVal.textProperty().set(timeSring);
+            Double hourInt = Double.parseDouble(hourString);
+            Double minsDoub = Double.parseDouble(minString) / 60f;
+            Double sliderVal = hourInt + minsDoub;
+            endTimeSlider.setValue(sliderVal);
+            
+        }
+        
+        //System.out.println("THE TIME IS: " + hourString + " and mins "+ minString);
+        
+        
     }
     
     private void setDate(boolean isStart) throws ParseException{
@@ -208,10 +232,12 @@ public class EditAppViewController implements Initializable {
             date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getStart().toString());
             dateString = new SimpleDateFormat("yyy-MM-dd").format(date);
             startDate.setValue(LocalDate.parse(dateString));
+            setTime(true);
         }else{
             date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(selected.getEnd().toString());
             dateString = new SimpleDateFormat("yyy-MM-dd").format(date);
             endDate.setValue(LocalDate.parse(dateString));
+            setTime(false);
         }
  
     }
