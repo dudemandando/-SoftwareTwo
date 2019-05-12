@@ -94,6 +94,7 @@ public class LoginViewController implements Initializable {
         if(isValid == true){
             //Set the current User in the database Driver Class
             dbDriver.setCurrentAdmin(userName.getText().toString());
+            
             //Take the user into the App
              //changeToMainMenu();
             changeToMainMenu();

@@ -6,11 +6,19 @@
 package softwaretwo;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class Driver {
@@ -234,17 +242,40 @@ public class Driver {
     }
     
     
-    
-    
-   
-    
-    public static void setCurrentAdmin(String name){
+    public static void setCurrentAdmin(String name) throws IOException{
         System.out.println("Current Admin User is: " + name);
         currentAdminName = name;
+        writeToLoginLog(name);
     }
     
     public static String getCurrentAdmin(){
         return currentAdminName;
+    }
+    
+    private static void writeToLoginLog(String userName) throws IOException{
+        String fileName = "loginLog.txt";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	Date date = new Date();
+        String writeString = userName + "     " + dateFormat.format(date) + System.getProperty( "line.separator" );
+	
+        try{
+                        
+            File f = new File(fileName);
+            write(writeString,f);
+            
+            
+        }catch (IOException e){
+            //e.printStackTrace();
+        }
+        
+        
+    }
+    
+    private static void write(String s, File f) throws IOException{
+        FileWriter fw = new FileWriter(f, true);
+        System.out.println("wrote " + s);
+        fw.write(s);
+        fw.close();
     }
     
 }
