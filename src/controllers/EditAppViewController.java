@@ -266,6 +266,14 @@ public class EditAppViewController implements Initializable {
            String deleteQuery = "DELETE from appointment where appointment.appointmentId =" + selected.getAppId() + ";";
            dbDriver.queryNoReturn(deleteQuery);
            System.out.println("deleted app");
+           try{
+             AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/SelectToMakeApp.fxml"));
+            rootPane.getChildren().setAll(pane);
+            dbDriver.nullOutCarryCustomer();
+            
+        }catch(Exception ex){
+        System.out.print(ex);
+        }
        }else{
            System.out.println("Null app selection");
        }
