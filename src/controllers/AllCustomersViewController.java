@@ -46,6 +46,7 @@ public class AllCustomersViewController implements Initializable {
     @FXML TableColumn <Customer, Integer>colCustomerActive;
     @FXML TableColumn <Customer, String> colCustomerLastUpdate;
     @FXML Button editUser;
+    @FXML Button deleteCust;
     @FXML Button cancel;
     
     
@@ -136,6 +137,25 @@ public class AllCustomersViewController implements Initializable {
                 dbDriver.setCarryCustomer(selected);
             
         }
+    }
+    
+    @FXML
+    private void deleteCustomerAndAllRelated(){
+        
+        Customer selected = customersTable.getSelectionModel().getSelectedItem();
+        System.out.println("deleteing customer : " + selected.getCustomerId());
+        
+        
+        //delete all appintments for customer
+        String deleteAppsQuery = "DELETE from appointment where appointment.customerId =" + selected.getCustomerId() + ";";
+        dbDriver.queryNoReturn(deleteAppsQuery);
+        
+        //delete address
+        String deleteAddressQuery = "DELETE FROM address where address.addressId =" + selected.getCustomerAddressId() +";";
+        dbDriver.queryNoReturn(deleteAddressQuery);
+        //delete customer
+        String deleteCustomerQuery = "DELETE from customer where customer.customerId = " + selected.getCustomerId() + ";";
+        dbDriver.queryNoReturn(deleteCustomerQuery);
     }
     
 }
