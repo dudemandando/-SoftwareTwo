@@ -19,6 +19,8 @@ public class SoftwareTwo extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/views/loginView.fxml"));
         stage.setTitle("Dan Burke | Software Two");
         stage.setScene(new Scene(root));
+        stage.setMinHeight(511);
+        stage.setMinWidth(700);
         stage.show();
         
     }

@@ -7,21 +7,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.LoginViewController">
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginViewController">
    <children>
-      <TextField fx:id="password" layoutX="87.0" layoutY="227.0" promptText="Enter Password" />
-      <TextField fx:id="userName" layoutX="87.0" layoutY="181.0" promptText="Enter User Name" />
-      <Button id="loginButton" onAction="#checkUserLogin"  layoutX="128.0" layoutY="272.0" mnemonicParsing="false" text="Login" />
-      <Text layoutX="104.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exisiting Users Sign In" />
-      <TextField fx:id="createUserName" layoutX="360.0" layoutY="181.0" promptText="Create User Name" />
-      <TextField fx:id="createPassword" layoutX="360.0" layoutY="227.0" promptText="Create Password" />
-      <Text layoutX="412.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Login" />
+      <TextField fx:id="password" layoutX="225.0" layoutY="227.0" promptText="Enter Password" />
+      <TextField fx:id="userName" layoutX="225.0" layoutY="181.0" promptText="Enter User Name" />
+      <Button id="loginButton" layoutX="266.0" layoutY="272.0" mnemonicParsing="false" onAction="#checkUserLogin" text="Login" />
+      <Text layoutX="242.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exisiting Users Sign In" />
       <Text layoutX="198.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar App">
          <font>
             <Font size="34.0" />
          </font>
       </Text>
-      <Button fx:id="createUserLogin" onAction="#createNewLogin"  layoutX="387.0" layoutY="272.0" mnemonicParsing="false" text="Create &amp; Login" />
    </children>
 </AnchorPane>
