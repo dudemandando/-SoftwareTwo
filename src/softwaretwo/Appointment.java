@@ -14,7 +14,7 @@ public class Appointment {
     private Integer appId;
     private Integer custId;
 
-  
+    private String customerName;
     private String title;
     private String descrip;
     private String location;
@@ -42,6 +42,32 @@ public class Appointment {
         this.lastUpdate = lastUpdate;
         this.lastUpdateBy = lastUpdateBy;
     }
+    
+    public Appointment(Integer appId, String custName, String title, String descrip, String location, String contact, String url, String start, String end, String createdBy, String createDate, String lastUpdate, String lastUpdateBy) {
+        this.appId = appId;
+        this.customerName = custName;
+        this.title = title;
+        this.descrip = descrip;
+        this.location = location;
+        this.contact = contact;
+        this.url = url;
+        this.start = start;
+        this.end = end;
+        this.createdBy = createdBy;
+        this.createDate = createDate;
+        this.lastUpdate = lastUpdate;
+        this.lastUpdateBy = lastUpdateBy;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+    
+    
     
       public String getTitle() {
         return title;

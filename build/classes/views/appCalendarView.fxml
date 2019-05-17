@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AppCalendarViewController">
+   <children>
+      <Text layoutX="196.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Appointments">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="startDate" layoutX="39.0" layoutY="70.0" promptText="Select Start Date" />
+      <DatePicker fx:id="endDate" layoutX="250.0" layoutY="70.0" promptText="Select End Date" />
+      <TableView fx:id="allAppsTable" layoutX="39.0" layoutY="136.0" prefHeight="200.0" prefWidth="533.0">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="97.0" text="Customer Name" />
+          <TableColumn fx:id="titleCol" prefWidth="111.0" text="Title" />
+            <TableColumn fx:id="descCol" prefWidth="121.0" text="Description" />
+            <TableColumn fx:id="locationCol" prefWidth="123.0" text="Location" />
+            <TableColumn fx:id="contactcol" text="Contact" />
+        </columns>
+      </TableView>
+      <Button fx:id="showAppsButton" layoutX="454.0" layoutY="70.0" mnemonicParsing="false" onAction="#showApps" text="Show Appointments" />
+      <Button fx:id="returnToMain" layoutX="235.0" layoutY="361.0" mnemonicParsing="false" onAction="#returnMain" text="Return to Main Menu" />
+   </children>
+</AnchorPane>

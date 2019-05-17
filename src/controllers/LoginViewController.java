@@ -52,20 +52,7 @@ public class LoginViewController implements Initializable {
             System.out.print("login existing");
     }
     
-    @FXML private void createNewLogin(ActionEvent event) throws IOException{
-        
-//        System.out.println("New login");
-//        System.out.println(createUserName.getText().toString());
-//        System.out.println(createPassword.getText().toString());
-//        
-//        String insertUserQuery = "insert into user (userName, password, active, createDate) ";
-//        String insertValues = "values (" + q + createUserName.getText().toString() + q + "," + q + createPassword.getText().toString() + q + ", true, current_timestamp());";
-//        String dbString = insertUserQuery + insertValues;
-//        Driver.queryNoReturn(dbString);
-//        dbDriver.setCurrentAdmin(userName.getText().toString());
-//        changeToMainMenu();
-        
-    }
+
     
     @FXML private void checkUserLogin(ActionEvent event) throws IOException, SQLException {
         System.out.println("Existing Login");

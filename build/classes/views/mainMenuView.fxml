@@ -14,18 +14,27 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Button fx:id="createNewCustomerViewButton" layoutX="72.0" layoutY="134.0" mnemonicParsing="false" onAction="#newCustomersView" text="Create New" />
+      <Button fx:id="createNewCustomerViewButton" layoutX="30.0" layoutY="134.0" mnemonicParsing="false" onAction="#newCustomersView" prefHeight="25.0" prefWidth="169.0" text="Create New" />
       <Button fx:id="AllCustomersViewButton" layoutX="27.0" layoutY="172.0" mnemonicParsing="false" onAction="#AllCustomersView" prefHeight="25.0" prefWidth="169.0" text="Modify Existing Customer" />
       <Text layoutX="69.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="250.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments">
+      <Text layoutX="262.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
       <Button fx:id="createAppointmentButton" layoutX="244.0" layoutY="134.0" mnemonicParsing="false" onAction="#CreateAppointmentView" text="Create/Edit Appointment" />
+      <Button fx:id="viewAppButton" layoutX="244.0" layoutY="172.0" mnemonicParsing="false" onAction="#viewAppointmentsCal" prefHeight="25.0" prefWidth="149.0" text="View Appointments" />
+      <Text layoutX="42.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Reports">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="appsByMonth" layoutX="22.0" layoutY="277.0" mnemonicParsing="false" onAction="#generateAppsByMonth" prefHeight="25.0" prefWidth="178.0" text="Appointment Types By Month" />
+      <Button layoutX="22.0" layoutY="315.0" mnemonicParsing="false" onAction="#generateSchedulePerConsultant" prefHeight="25.0" prefWidth="178.0" text="Schedule Per Consultant" />
+      <Button layoutX="24.0" layoutY="348.0" mnemonicParsing="false" onAction="#generateAppsByLocation" prefHeight="25.0" prefWidth="178.0" text="All Appointments By Location" />
    </children>
 </AnchorPane>
