@@ -85,8 +85,12 @@ public class MainMenuViewController implements Initializable {
     }
     
     @FXML
-    public void generateSchedulePerConsultant(){
+    public void generateSchedulePerConsultant() throws IOException, SQLException{
         System.out.println("Genreate Schedule per Consultant Button Click");
+        String consultantScheduleQuery = "select contact, title, appDesc, location, contact, start "
+                + "from appointment group by contact order by start;";
+        
+        GenerateReport(consultantScheduleQuery, "ConsultantSchedule.csv");
     }
     
     @FXML
@@ -120,7 +124,10 @@ public class MainMenuViewController implements Initializable {
             while(result.next()){
                 String reportString = "";
                 
-                for(int i = 1; i< rsmd.getColumnCount(); i++){
+                for(int i = 1; i<= rsmd.getColumnCount(); i++){
+                    if(rsmd.getColumnName(i) == "start"){
+                        System.out.println(" start is"+result.getString(i));
+                    }
                  reportString += result.getString(i) + ",";
                 }
                 reportString += "\n";
