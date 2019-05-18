@@ -75,7 +75,9 @@ public class ModifyCustomerController implements Initializable {
     
     private boolean  validateFields(){
        
-        if(customerName.getText().toString().trim().isEmpty() || addressOne.getText().toString().trim().isEmpty() || city.getText().toString().trim().isEmpty() || postalCode.getText().toString().trim().isEmpty() || phoneNumber.getText().toString().trim().isEmpty() ||  country.getText().toString().trim().isEmpty()){
+        if(customerName.getText().toString().trim().isEmpty() || addressOne.getText().toString().trim().isEmpty() || 
+                city.getText().toString().trim().isEmpty() || postalCode.getText().toString().trim().isEmpty() || 
+                phoneNumber.getText().toString().trim().isEmpty() ||  country.getText().toString().trim().isEmpty()){
             
              return false;
         }else{

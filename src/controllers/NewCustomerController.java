@@ -50,7 +50,8 @@ public class NewCustomerController implements Initializable {
     
     private boolean  validateFields(){
   
-        if(customerNameField.getText().toString().trim().isEmpty() || addressOne.getText().toString().trim().isEmpty() || city.getText().toString().trim().isEmpty() || postalCode.getText().toString().trim().isEmpty() || phone.getText().toString().trim().isEmpty() ||  country.getText().toString().trim().isEmpty()){
+        if(customerNameField.getText().toString().trim().isEmpty() || addressOne.getText().toString().trim().isEmpty() 
+                || city.getText().toString().trim().isEmpty() || postalCode.getText().toString().trim().isEmpty() || phone.getText().toString().trim().isEmpty() ||  country.getText().toString().trim().isEmpty()){
              return false;
         }else{
             return true;

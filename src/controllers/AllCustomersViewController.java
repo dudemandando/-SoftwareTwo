@@ -39,6 +39,7 @@ public class AllCustomersViewController implements Initializable {
 
     
     private Driver dbDriver;
+    private boolean canModify;
     private ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     @FXML AnchorPane root;
     @FXML TableView<Customer> customersTable;
@@ -69,11 +70,11 @@ public class AllCustomersViewController implements Initializable {
     private void editSelected() throws IOException{
         System.out.println("Modify Selected Button");
         modifySelectedCustomer();
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/modifyCustomerView.fxml"));
-        root.getChildren().setAll(pane);
         
-        
-        
+        if(canModify){
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/modifyCustomerView.fxml"));
+            root.getChildren().setAll(pane);
+        } 
     }
     
     @FXML 
@@ -134,9 +135,12 @@ public class AllCustomersViewController implements Initializable {
             Customer selected = customersTable.getSelectionModel().getSelectedItem();
             if(selected == null){
                 AlertBox.display("Selection Error", "Please Select a Customer");
+                canModify = false;
             }else{
+                canModify = true;
                 System.out.println(selected.getCustomerName());
                 dbDriver.setCarryCustomer(selected);
+                
             }
         }
     }
@@ -147,6 +151,7 @@ public class AllCustomersViewController implements Initializable {
         Customer selected = customersTable.getSelectionModel().getSelectedItem();
         if(selected == null){
                 AlertBox.display("Selection Error", "Please Select a Customer");
+                return;
         }else{
             System.out.println("deleteing customer : " + selected.getCustomerId());
             //delete all appintments for customer
