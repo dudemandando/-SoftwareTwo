@@ -116,8 +116,7 @@ public class MainMenuViewController implements Initializable {
             String headerString = "";
             
             for(int i = 1; i <= rsmd.getColumnCount(); i++){
-                headerString += rsmd.getColumnName(i) + ",";
-                
+                headerString += rsmd.getColumnName(i) + ",";    
             }
             headerString += "\n";
             fw.write(headerString);
@@ -125,21 +124,15 @@ public class MainMenuViewController implements Initializable {
                 String reportString = "";
                 
                 for(int i = 1; i<= rsmd.getColumnCount(); i++){
-                    if(rsmd.getColumnName(i) == "start"){
-                        System.out.println(" start is"+result.getString(i));
-                    }
                  reportString += result.getString(i) + ",";
                 }
                 reportString += "\n";
                 fw.write(reportString);
             }
-            
             fw.close();
         }catch(IOException e){
             System.out.println(e);
-        }
-        
-        
+        }   
     }
     
     
