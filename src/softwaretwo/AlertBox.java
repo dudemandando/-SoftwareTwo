@@ -29,10 +29,12 @@ public class AlertBox {
         
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
-        window.setMinWidth(250);
+        window.setMinWidth(400);
+        window.setMinHeight(250);
         
         Label label = new Label();
         label.setText(message);
+        
         Button closeButton = new Button("Close");
         closeButton.setOnAction(e-> window.close());
         

@@ -20,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import softwaretwo.AlertBox;
 import softwaretwo.Customer;
 import softwaretwo.Driver;
 
@@ -89,18 +90,24 @@ public class SelectToMakeAppController implements Initializable {
     private void moveToCreateAppointment(){
         System.out.println("selected customer");
         if(allCustomers.size() >  0){
-            
-                Customer selected = allCustTable.getSelectionModel().getSelectedItem();
-                System.out.println(selected.getCustomerName());
-                dbDriver.setCarryCustomer(selected);
-                
-             try{
-                AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/createApp.fxml"));
-                root.getChildren().setAll(pane);
-             }catch(Exception ex){
-                System.out.print(ex);
+            Customer selected = allCustTable.getSelectionModel().getSelectedItem();
+            if(selected == null){
+                AlertBox.display("Selection Error", "Please Select a Customer");
+            }else{
+                    System.out.println(selected.getCustomerName());
+                    dbDriver.setCarryCustomer(selected);
+                    
+                    try{
+                        AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/createApp.fxml"));
+                        root.getChildren().setAll(pane);
+                    }catch(Exception ex){
+                        System.out.print(ex);
+                    }
             }
- 
+
+        }else{
+            AlertBox.display("No Customers", "There are no Customers to Select From \n"
+                    + "Please enter new customers before making appointments");
         }
     }
     
@@ -109,16 +116,21 @@ public class SelectToMakeAppController implements Initializable {
         if(allCustomers.size() >  0){
             
                 Customer selected = allCustTable.getSelectionModel().getSelectedItem();
-                System.out.println(selected.getCustomerName());
-                dbDriver.setCarryCustomer(selected);
-                
-             try{
-                AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/EditAppView.fxml"));
-                root.getChildren().setAll(pane);
-             }catch(Exception ex){
-                System.out.print(ex);
-            }
- 
+                if(selected == null){
+                    AlertBox.display("Selection Error", "Please Select a Customer");
+                }else{
+                    System.out.println(selected.getCustomerName());
+                    dbDriver.setCarryCustomer(selected);
+                    try{
+                        AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/EditAppView.fxml"));
+                        root.getChildren().setAll(pane);
+                    }catch(Exception ex){
+                        System.out.print(ex);
+                    }
+                }
+        }else{
+            AlertBox.display("No Customers", "There are no Customers to Select From \n"
+                        + "Please enter new customers before making appointments");
         }
     }
     

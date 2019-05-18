@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import softwaretwo.AlertBox;
 import softwaretwo.Driver;
 
 
@@ -69,11 +70,16 @@ public class LoginViewController implements Initializable {
                     
                 }
             }else{
-                if(myRs.getString("userName").equals(userName.getText().toString()) && myRs.getString("password").equals(password.getText().toString())){
-                    System.out.println("UserName and Password Match");
-                    isValid = true;
-                    
-                }
+//                if(myRs.getString("userName").equals(userName.getText().toString()) && myRs.getString("password").equals(password.getText().toString())){
+//                    System.out.println("UserName and Password Match");
+//                    isValid = true;
+//                    
+//                }else{
+//                    
+//                }
+                AlertBox.display("Login Error", "User Name and Password Not Found \n"
+                        + "Do not left fields blank \n"
+                        + "Ensure your User Name and Password are correct");
             }
         
         }

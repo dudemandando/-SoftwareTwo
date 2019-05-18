@@ -95,6 +95,12 @@ public class CreateAppController implements Initializable {
         
     }
     
+//    private boolean validate(){
+//        if(titleField != null && descField != null && locationField != null && contactField != null && urlField != null){
+//            
+//        }
+//    }
+    
     private String formatDate(String timeVal, boolean isStart){
         //Get the Dates and format correctly
         //yyyy-mm-dd hh:mm:ss

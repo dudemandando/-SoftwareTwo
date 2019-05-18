@@ -26,6 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
+import softwaretwo.AlertBox;
 import softwaretwo.Driver;
 import softwaretwo.Customer;
 
@@ -100,9 +101,7 @@ public class AllCustomersViewController implements Initializable {
                 );
             
                 allCustomers.add(entry);
-            
-                
-                    
+     
             }
             for(int i =0; i< allCustomers.size(); i++ ){
                     System.out.println("Name is: " + allCustomers.get(i).getCustomerName());
@@ -132,30 +131,41 @@ public class AllCustomersViewController implements Initializable {
     private void modifySelectedCustomer(){
         if(allCustomers.size() >  0){
             
-                Customer selected = customersTable.getSelectionModel().getSelectedItem();
+            Customer selected = customersTable.getSelectionModel().getSelectedItem();
+            if(selected == null){
+                AlertBox.display("Selection Error", "Please Select a Customer");
+            }else{
                 System.out.println(selected.getCustomerName());
                 dbDriver.setCarryCustomer(selected);
-            
+            }
         }
     }
     
     @FXML
-    private void deleteCustomerAndAllRelated(){
+    private void deleteCustomerAndAllRelated() throws SQLException, IOException{
         
         Customer selected = customersTable.getSelectionModel().getSelectedItem();
-        System.out.println("deleteing customer : " + selected.getCustomerId());
+        if(selected == null){
+                AlertBox.display("Selection Error", "Please Select a Customer");
+        }else{
+            System.out.println("deleteing customer : " + selected.getCustomerId());
+            //delete all appintments for customer
+            String deleteAppsQuery = "DELETE from appointment where appointment.customerId =" + selected.getCustomerId() + ";";
+            dbDriver.queryNoReturn(deleteAppsQuery);
         
+            //delete address
+            String deleteAddressQuery = "DELETE FROM address where address.addressId =" + selected.getCustomerAddressId() +";";
+            dbDriver.queryNoReturn(deleteAddressQuery);
+            //delete customer
+            String deleteCustomerQuery = "DELETE from customer where customer.customerId = " + selected.getCustomerId() + ";";
+            dbDriver.queryNoReturn(deleteCustomerQuery);
+            
+            populateAllCustomers();
+            populateAllCustomersTable();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/AllCustomersView.fxml"));
+            root.getChildren().setAll(pane);
+        }
         
-        //delete all appintments for customer
-        String deleteAppsQuery = "DELETE from appointment where appointment.customerId =" + selected.getCustomerId() + ";";
-        dbDriver.queryNoReturn(deleteAppsQuery);
-        
-        //delete address
-        String deleteAddressQuery = "DELETE FROM address where address.addressId =" + selected.getCustomerAddressId() +";";
-        dbDriver.queryNoReturn(deleteAddressQuery);
-        //delete customer
-        String deleteCustomerQuery = "DELETE from customer where customer.customerId = " + selected.getCustomerId() + ";";
-        dbDriver.queryNoReturn(deleteCustomerQuery);
     }
     
 }

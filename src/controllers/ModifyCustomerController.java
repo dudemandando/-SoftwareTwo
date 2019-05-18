@@ -19,6 +19,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import softwaretwo.AlertBox;
 import softwaretwo.Customer;
 import softwaretwo.Driver;
 
@@ -72,15 +73,31 @@ public class ModifyCustomerController implements Initializable {
         
     }
     
+    private boolean  validateFields(){
+       
+        if(customerName.getText().toString().trim().isEmpty() || addressOne.getText().toString().trim().isEmpty() || city.getText().toString().trim().isEmpty() || postalCode.getText().toString().trim().isEmpty() || phoneNumber.getText().toString().trim().isEmpty() ||  country.getText().toString().trim().isEmpty()){
+            
+             return false;
+        }else{
+            return true;
+        }
+        
+    }
+    
     @FXML
     public void onSaveButton() throws SQLException{
-        System.out.println("Modify Customer Save Button");
-        determineActivity();
-        setNewInfo();
-        checkCountry();
-        checkCity();
-        updateAll();
-        returnToAllCustomers();
+        if(validateFields()){
+            System.out.println("Modify Customer Save Button");
+            determineActivity();
+            setNewInfo();
+            checkCountry();
+            checkCity();
+            updateAll();
+            returnToAllCustomers();
+        }else{
+            AlertBox.display("Empty Fields", "All fields must be completed");
+        }
+        
     }
     
     @FXML
