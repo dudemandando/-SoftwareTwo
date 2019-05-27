@@ -61,7 +61,6 @@ public class EditAppViewController implements Initializable {
    @FXML TextField urlField;
    
    @FXML DatePicker startDate;
-   @FXML DatePicker endDate;
    
    @FXML Slider startTimeSlider;
    @FXML Slider endTimeSlider;
@@ -131,7 +130,7 @@ public class EditAppViewController implements Initializable {
         if(isStart){
             appTime = startDate.valueProperty().getValue().toString() + " " + startTimeVal.getText();
         }else{
-            appTime = endDate.valueProperty().getValue().toString() + " " + endTimeVal.getText();
+            appTime = startDate.valueProperty().getValue().toString() + " " + endTimeVal.getText();
         }
         
         //System.out.println("THE FORMATTED DATE IS: " + appTime);
@@ -211,6 +210,9 @@ public class EditAppViewController implements Initializable {
     
     @FXML
     private void updateEndTime(){
+        
+        
+            
         FuncInter1 add = (String x, String y, String z)-> x + y + z;
         //updates the end time text value text on the screen to show the time the user has selected, converts to a time value
         Double doubMinsVal = endTimeSlider.valueProperty().doubleValue() % 1;
@@ -238,18 +240,21 @@ public class EditAppViewController implements Initializable {
         }
         
         endTimeVal.textProperty().set(timeString);
+        
+        if(endTimeSlider.getValue() < startTimeSlider.getValue()){
+            AlertBox.display("Time Error", "End Time must be after start time");
+        }
  
     }
     
     private boolean validateFields(){
-        
+                
         if(titleField.getText().toString().trim().isEmpty() ||
                 descField.getText().toString().trim().isEmpty() ||
                 locationField.getText().toString().trim().isEmpty() ||
                 contactField.getText().toString().trim().isEmpty() ||
                 urlField.getText().toString().trim().isEmpty() ||
-                startDate.getValue() == null ||
-                endDate.getValue() == null){
+                startDate.getValue() == null || endTimeSlider.getValue() < startTimeSlider.getValue()){
             return false;
         }else{
             return true;
@@ -279,7 +284,7 @@ public class EditAppViewController implements Initializable {
             rootPane.getChildren().setAll(pane);
             dbDriver.nullOutCarryCustomer();
         } else {
-            AlertBox.display("Check Fields","Please do not leave any fields incomplete.");
+            AlertBox.display("Check Fields","Please do not leave any fields incomplete. \n Appointment Ending Time must be after start Time.");
         }
         
         
@@ -368,7 +373,7 @@ public class EditAppViewController implements Initializable {
         }else{
             date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTimeString);
             dateString = new SimpleDateFormat("yyyy-MM-dd").format(date);
-            endDate.setValue(LocalDate.parse(dateString));
+            startDate.setValue(LocalDate.parse(dateString));
             setTime(dateTimeString, false);
         }
  

@@ -53,7 +53,6 @@ public class CreateAppController implements Initializable {
    @FXML TextField urlField;
    
    @FXML DatePicker startDate;
-   @FXML DatePicker endDate;
    
    @FXML Slider startTimeSlider;
    @FXML Slider endTimeSlider;
@@ -92,8 +91,7 @@ public class CreateAppController implements Initializable {
                 locationField.getText().toString().trim().isEmpty() ||
                 contactField.getText().toString().trim().isEmpty() ||
                 urlField.getText().toString().trim().isEmpty() ||
-                startDate.getValue() == null ||
-                endDate.getValue() == null){
+                startDate.getValue() == null || endTimeSlider.getValue() < startTimeSlider.getValue()){
             return false;
         }else{
             return true;
@@ -128,7 +126,7 @@ public class CreateAppController implements Initializable {
         if(isStart){
             appTime = startDate.valueProperty().getValue().toString() + " " + startTimeVal.getText();
         }else{
-            appTime = endDate.valueProperty().getValue().toString() + " " + endTimeVal.getText();
+            appTime = startDate.valueProperty().getValue().toString() + " " + endTimeVal.getText();
         }
         
         //System.out.println("THE FORMATTED DATE IS: " + appTime);
@@ -202,7 +200,7 @@ public class CreateAppController implements Initializable {
             dbDriver.queryNoReturn(addAppString);
             cancel();
         } else {
-            AlertBox.display("Empty Fields","Ensure all fields are not left blank.");
+            AlertBox.display("Empty Fields","Ensure all fields are not left blank. End Time Must be after start time.");
         }
         
         
@@ -250,6 +248,10 @@ public class CreateAppController implements Initializable {
         
         startTimeVal.textProperty().set(timeString);
         
+        if(endTimeSlider.getValue() < startTimeSlider.getValue()){
+            AlertBox.display("Time Error", "End Time must be after start time");
+        }
+        
     }
     
     @FXML
@@ -281,6 +283,10 @@ public class CreateAppController implements Initializable {
         }
         
         endTimeVal.textProperty().set(timeString);
+        
+        if(endTimeSlider.getValue() < startTimeSlider.getValue()){
+            AlertBox.display("Time Error", "End Time must be after start time");
+        }
  
     }
     

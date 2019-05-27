@@ -26,16 +26,14 @@
       </Text>
       <Button fx:id="cancelButton" layoutX="396.0" layoutY="264.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
       <Button fx:id="saveAppButton" layoutX="232.0" layoutY="264.0" mnemonicParsing="false" onAction="#save" text="Save" />
-      <Slider fx:id="endTimeSlider" blockIncrement="1.0" layoutX="412.0" layoutY="196.0" max="24.0" onMouseClicked="#updateEndTime" prefHeight="14.0" prefWidth="108.0" showTickLabels="true" showTickMarks="true" />
-      <Text layoutX="332.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Time" />
+      <Slider fx:id="endTimeSlider" blockIncrement="1.0" layoutX="407.0" layoutY="199.0" majorTickUnit="1.0" max="17.0" min="9.0" minorTickCount="5" onMouseClicked="#updateEndTime" prefHeight="14.0" prefWidth="108.0" showTickLabels="true" showTickMarks="true" />
+      <Text layoutX="330.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Time" />
       <Text layoutX="332.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Time" />
-      <Slider fx:id="startTimeSlider" blockIncrement="1.0" layoutX="412.0" layoutY="122.0" max="24.0" onMouseClicked="#updateStartTime" prefHeight="14.0" prefWidth="108.0" showTickLabels="true" showTickMarks="true" value="12.0" />
-      <DatePicker fx:id="endDate" layoutX="395.0" layoutY="155.0" />
+      <Slider fx:id="startTimeSlider" blockIncrement="1.0" layoutX="412.0" layoutY="122.0" majorTickUnit="1.0" max="17.0" min="9.0" minorTickCount="5" onMouseClicked="#updateStartTime" prefHeight="14.0" prefWidth="108.0" showTickLabels="true" showTickMarks="true" value="9.0" />
       <DatePicker fx:id="startDate" layoutX="395.0" layoutY="78.0" />
-      <Text layoutX="332.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End" />
       <Text layoutX="330.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date" />
-      <Text fx:id="startTimeVal" layoutX="599.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text fx:id="endTimeVal" layoutX="599.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="startTimeVal" layoutX="422.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="60.251953125" />
+      <Text fx:id="endTimeVal" layoutX="431.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="60.251953125" />
       <TableView fx:id="existingAppTable" layoutX="51.0" layoutY="338.0" onMouseClicked="#populateFieldWithSelected" prefHeight="101.0" prefWidth="530.0">
          <columns>
             <TableColumn fx:id="locationCol" prefWidth="98.0" text="Location" />
@@ -46,6 +44,6 @@
          </columns>
       </TableView>
       <Text layoutX="41.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select an Appointment from Below, it will populate the fields above, make changes and click save to update the appointment" textAlignment="CENTER" wrappingWidth="578.626953125" />
-      <Button fx:id="deleteButton" onAction="#delete" layoutX="306.0" layoutY="264.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="deleteButton" layoutX="306.0" layoutY="264.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
    </children>
 </AnchorPane>
