@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import softwaretwo.AlertBox;
 import softwaretwo.Appointment;
 import softwaretwo.Customer;
 import softwaretwo.Driver;
@@ -61,18 +62,25 @@ public class AppCalendarViewController implements Initializable {
     
     @FXML
     private void showApps() throws SQLException{
-        System.out.println("Show Appointments Button Clicked with dates" + startDate.getValue() + " "+ endDate.getValue());
-        LocalDate start = startDate.getValue();
-        LocalDate end = endDate.getValue();
-        String appQuery;
-        if(start.compareTo(end) <0){
-            System.out.println("Dates Validate");
-            appQuery = "select customerName, appointmentId,  title, appDesc, location, contact, url, start, end, appointment.createDate, appointment.createdBy, appointment.lastUpdate, appointment.lastUpdateBy "
-                    + "from customer join appointment on appointment.customerId = customer.customerId "
-                    + "where appointment.start >" + q+ start+ q+ " and appointment.end < "+ q+end+ q+";";
-            System.out.println(appQuery);
-            populateAppTable(dbDriver.queryAndReturn(appQuery));
+        
+        if (startDate.getValue() == null || endDate.getValue() == null) {
+            AlertBox.display("Date Error", "Please select start and end date to show appointments.");
+        } else {
+            System.out.println("Show Appointments Button Clicked with dates" + startDate.getValue() + " " + endDate.getValue());
+            LocalDate start = startDate.getValue();
+            LocalDate end = endDate.getValue();
+            String appQuery;
+            if (start.compareTo(end) < 0) {
+                System.out.println("Dates Validate");
+                appQuery = "select customerName, appointmentId,  title, appDesc, location, contact, url, start, end, appointment.createDate, appointment.createdBy, appointment.lastUpdate, appointment.lastUpdateBy "
+                        + "from customer join appointment on appointment.customerId = customer.customerId "
+                        + "where appointment.start >" + q + start + q + " and appointment.end < " + q + end + q + ";";
+                System.out.println(appQuery);
+                populateAppTable(dbDriver.queryAndReturn(appQuery));
+            }
         }
+        
+        
 
     }
     private void populateAppTable(ResultSet result) throws SQLException{

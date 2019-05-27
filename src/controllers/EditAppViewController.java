@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Binding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,6 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import softwaretwo.AlertBox;
 import softwaretwo.Appointment;
 import softwaretwo.Driver;
 
@@ -103,6 +105,10 @@ public class EditAppViewController implements Initializable {
        }
        initTimes();
        
+       if(allAppointments.size() == 0){
+           AlertBox.display("No Appointments","There are no appointments for this customer.");
+           cancel();
+       }       
     } 
     
     @FXML
@@ -235,26 +241,48 @@ public class EditAppViewController implements Initializable {
  
     }
     
+    private boolean validateFields(){
+        
+        if(titleField.getText().toString().trim().isEmpty() ||
+                descField.getText().toString().trim().isEmpty() ||
+                locationField.getText().toString().trim().isEmpty() ||
+                contactField.getText().toString().trim().isEmpty() ||
+                urlField.getText().toString().trim().isEmpty() ||
+                startDate.getValue() == null ||
+                endDate.getValue() == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
     @FXML 
     private void save() throws SQLException, IOException{
-        System.out.println("Updating Appointment Record");
-        String saveAppQuery = "UPDATE appointment set "
-                + "appointment.title = " + q + titleField.getText() + q + com +
-                "appointment.appDesc = " + q +descField.getText() + q + com +
-                "appointment.location = " + q +locationField.getText() + q + com +
-                "appointment.contact = " + q +locationField.getText() + q + com +
-                "appointment.url = " + q +locationField.getText() + q + com +
-                "appointment.start = " + q + formatDate(startTimeVal.getText(), true) + q + com +
-                "appointment.end = " + q + formatDate(endTimeVal.getText(), false) + q + com +
-                "appointment.lastUpdate = now()," + 
-                "appointment.lastUpdateBy = " + q +dbDriver.getCurrentAdmin()+ q + " WHERE appointmentId = " + selected.getAppId() + ";";
         
-        System.out.println(saveAppQuery);
-        dbDriver.queryNoReturn(saveAppQuery);
+        if (validateFields()) {
+            System.out.println("Updating Appointment Record");
+            String saveAppQuery = "UPDATE appointment set "
+                    + "appointment.title = " + q + titleField.getText() + q + com
+                    + "appointment.appDesc = " + q + descField.getText() + q + com
+                    + "appointment.location = " + q + locationField.getText() + q + com
+                    + "appointment.contact = " + q + locationField.getText() + q + com
+                    + "appointment.url = " + q + locationField.getText() + q + com
+                    + "appointment.start = " + q + formatDate(startTimeVal.getText(), true) + q + com
+                    + "appointment.end = " + q + formatDate(endTimeVal.getText(), false) + q + com
+                    + "appointment.lastUpdate = now(),"
+                    + "appointment.lastUpdateBy = " + q + dbDriver.getCurrentAdmin() + q + " WHERE appointmentId = " + selected.getAppId() + ";";
+
+            System.out.println(saveAppQuery);
+            dbDriver.queryNoReturn(saveAppQuery);
+
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/SelectToMakeApp.fxml"));
+            rootPane.getChildren().setAll(pane);
+            dbDriver.nullOutCarryCustomer();
+        } else {
+            AlertBox.display("Check Fields","Please do not leave any fields incomplete.");
+        }
         
-        AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/SelectToMakeApp.fxml"));
-        rootPane.getChildren().setAll(pane);
-        dbDriver.nullOutCarryCustomer();
+        
        
         
     }
