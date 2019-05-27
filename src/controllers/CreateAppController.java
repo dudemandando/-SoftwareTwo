@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import softwaretwo.AlertBox;
 import softwaretwo.Appointment;
 import softwaretwo.Customer;
 import softwaretwo.Driver;
@@ -81,6 +82,24 @@ public class CreateAppController implements Initializable {
     private String operate(String a, String b, String c, FuncInter1 fobj) 
     { 
         return fobj.operation(a, b, c); 
+    }
+    
+    
+    private boolean validateEmptyFields(){
+        
+        if(titleField.getText().toString().trim().isEmpty() ||
+                descField.getText().toString().trim().isEmpty() ||
+                locationField.getText().toString().trim().isEmpty() ||
+                contactField.getText().toString().trim().isEmpty() ||
+                urlField.getText().toString().trim().isEmpty() ||
+                startDate.getValue() == null ||
+                endDate.getValue() == null){
+            return false;
+        }else{
+            return true;
+        }
+        
+        
     }
 
     @Override
@@ -157,25 +176,36 @@ public class CreateAppController implements Initializable {
     
     @FXML
     private void addAppointment(){
-  
-       String addAppString = "INSERT INTO appointment (appointment.customerId, appointment.title, appointment.appDesc, appointment.location, appointment.contact, appointment.url, appointment.start, appointment.end, appointment.createDate, appointment.createdBy, appointment.lastUpdate, appointment.lastUpdateBy) " +
-               "VALUES (" +
-               dbDriver.getCarryCustomer().getCustomerId() + com +
-               q+titleField.getText()+q + com +
-               q+descField.getText()+q + com +
-               q+locationField.getText() +q + com+
-               q+contactField.getText()+q + com +
-               q+urlField.getText()+q + com +
-               q+ formatDate(startTimeVal.textProperty().toString(), true)+ q + com +
-               q+ formatDate(endTimeVal.textProperty().toString(), false) +q + com +
-               "now()" + com +
-               q+dbDriver.getCurrentAdmin()+ q + com +
-               "now()" + com +
-               q+dbDriver.getCurrentAdmin() + q + ");";   
-       
-       System.out.println(addAppString);
-       dbDriver.queryNoReturn(addAppString);
-       cancel();
+        
+        //Validate
+        if (validateEmptyFields()) {
+            if (startTimeVal == null) {
+                System.out.println("start date time val is null");
+            }
+
+            String addAppString = "INSERT INTO appointment (appointment.customerId, appointment.title, appointment.appDesc, appointment.location, appointment.contact, appointment.url, appointment.start, appointment.end, appointment.createDate, appointment.createdBy, appointment.lastUpdate, appointment.lastUpdateBy) "
+                    + "VALUES ("
+                    + dbDriver.getCarryCustomer().getCustomerId() + com
+                    + q + titleField.getText() + q + com
+                    + q + descField.getText() + q + com
+                    + q + locationField.getText() + q + com
+                    + q + contactField.getText() + q + com
+                    + q + urlField.getText() + q + com
+                    + q + formatDate(startTimeVal.textProperty().toString(), true) + q + com
+                    + q + formatDate(endTimeVal.textProperty().toString(), false) + q + com
+                    + "now()" + com
+                    + q + dbDriver.getCurrentAdmin() + q + com
+                    + "now()" + com
+                    + q + dbDriver.getCurrentAdmin() + q + ");";
+
+            System.out.println(addAppString);
+            dbDriver.queryNoReturn(addAppString);
+            cancel();
+        } else {
+            AlertBox.display("Empty Fields","Ensure all fields are not left blank.");
+        }
+        
+        
     }
     
     @FXML

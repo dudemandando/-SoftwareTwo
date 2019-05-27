@@ -78,7 +78,7 @@ public class LoginViewController implements Initializable {
 //                    
 //                }
                 AlertBox.display("Login Error", "User Name and Password Not Found \n"
-                        + "Do not left fields blank \n"
+                        + "Do not leave fields blank \n"
                         + "Ensure your User Name and Password are correct");
             }
         
