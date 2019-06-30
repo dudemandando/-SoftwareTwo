@@ -8,6 +8,7 @@ package controllers;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ import softwaretwo.AlertBox;
 import softwaretwo.Appointment;
 import softwaretwo.Customer;
 import softwaretwo.Driver;
+import softwaretwo.TimeHandler;
 
 /**
  * FXML Controller class
@@ -64,6 +66,7 @@ public class CreateAppController implements Initializable {
    @FXML Button cancelButton;
    
    private Driver dbDriver;
+   private TimeHandler timeHandler;
    
     private char q = '"';
     private char semi = ';';
@@ -173,15 +176,16 @@ public class CreateAppController implements Initializable {
     }
     
     @FXML
-    private void addAppointment(){
+    private void addAppointment() throws SQLException, ParseException{
         
         //Validate
-        if (validateEmptyFields()) {
-            if (startTimeVal == null) {
-                System.out.println("start date time val is null");
-            }
-
-            String addAppString = "INSERT INTO appointment (appointment.customerId, appointment.title, appointment.appDesc, appointment.location, appointment.contact, appointment.url, appointment.start, appointment.end, appointment.createDate, appointment.createdBy, appointment.lastUpdate, appointment.lastUpdateBy) "
+        if (validateEmptyFields() ) {
+            
+            if(timeHandler.checkConflictsAppointmentNew(formatDate(startTimeVal.textProperty().toString(), true), formatDate(endTimeVal.textProperty().toString(), false)) ){
+                
+                AlertBox.display("Time Conflict", "There is already another appointment scheduled for that time.");
+            }else{
+                 String addAppString = "INSERT INTO appointment (appointment.customerId, appointment.title, appointment.appDesc, appointment.location, appointment.contact, appointment.url, appointment.start, appointment.end, appointment.createDate, appointment.createdBy, appointment.lastUpdate, appointment.lastUpdateBy) "
                     + "VALUES ("
                     + dbDriver.getCarryCustomer().getCustomerId() + com
                     + q + titleField.getText() + q + com
@@ -197,8 +201,11 @@ public class CreateAppController implements Initializable {
                     + q + dbDriver.getCurrentAdmin() + q + ");";
 
             System.out.println(addAppString);
+            
             dbDriver.queryNoReturn(addAppString);
             cancel();
+            }
+
         } else {
             AlertBox.display("Empty Fields","Ensure all fields are not left blank. End Time Must be after start time.");
         }
